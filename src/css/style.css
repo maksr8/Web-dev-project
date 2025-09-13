@@ -1,4 +1,173 @@
 /* Import fonts */
 @import url("../fonts/Roboto.css");
 /* Reset and normalize */
-@import url("./normalize.css");/*# sourceMappingURL=style.css.map */
+@import url("./normalize.css");
+.popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.popup .popup-content {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 3px;
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+}
+.popup .popup-content .close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.popup .popup-content h2 {
+  margin-bottom: 1rem;
+}
+.popup .popup-content .teacher-desc {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+.popup .popup-content .toggle-map {
+  color: #ff6200;
+  cursor: pointer;
+}
+
+body {
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+}
+
+.page {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+
+.header-upper {
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+}
+
+.header-lower {
+  grid-row: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+footer {
+  margin-top: 2rem;
+  text-align: center;
+  padding: 1.5rem 0;
+  background: #f5f5f5;
+}
+footer nav ul {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+body {
+  font-family: "Roboto", Arial, sans-serif;
+  background: #f5f5f5;
+  color: #111;
+}
+
+.page {
+  padding: 0 5rem;
+  min-height: 100vh;
+  background-color: #fff;
+  box-shadow: -3px 0 20px -15px #111, 3px 0 20px -15px #111;
+}
+
+header .logo {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 3rem;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: -1px -1px 0 #ff6200, 2px 1px 0 #111;
+}
+header .logo:hover {
+  text-shadow: -3px -1px 0 #c24700, 3px 1px 0 #111;
+  cursor: pointer;
+}
+header .search-form {
+  display: flex;
+  gap: 0.5rem;
+}
+header .search-form input {
+  border-radius: 2px;
+  padding: 0.4rem 1rem;
+  border: 1px solid #777;
+}
+header nav ul {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.button1 {
+  background-color: #ff6200;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
+.button1:hover {
+  background-color: #c24700;
+}
+
+section {
+  margin: 2rem 0;
+  padding-bottom: 2rem;
+  text-align: center;
+}
+
+.pagination {
+  display: flex;
+  justify-content: left;
+  gap: 0.5rem;
+}
+.pagination a {
+  color: #1a73e8;
+  text-decoration: none;
+}
+.pagination a:hover {
+  color: #0049b5;
+}
+
+.hidden {
+  display: none;
+}
+
+.scroll-x {
+  overflow-x: auto;
+  white-space: nowrap;
+}/*# sourceMappingURL=style.css.map */

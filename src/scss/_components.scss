@@ -1,0 +1,87 @@
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background: $color-light-gray;
+    color: $color-black;
+}
+
+.page {
+    padding: 0 5rem;
+    min-height: 100vh;
+    background-color: $color-white;
+    box-shadow:
+        -3px 0 20px -15px $color-black,
+        3px 0 20px -15px $color-black;
+}
+
+header {
+
+    .logo {
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 3rem;
+        font-weight: bold;
+        color: $color-white;
+        text-shadow:
+            -1px -1px 0 $color-orange,
+            2px 1px 0 $color-black;
+
+        &:hover {
+            text-shadow:
+                -3px -1px 0 $color-orange-dark,
+                3px 1px 0 $color-black;
+            cursor: pointer;
+        }
+    }
+
+    .search-form {
+        display: flex;
+        gap: 0.5rem;
+
+        input {
+            border-radius: 2px;
+            padding: 0.4rem 1rem;
+            border: 1px solid $color-gray;
+        }
+    }
+
+    nav ul {
+        display: flex;
+        gap: 1.5rem;
+    }
+}
+
+.button1 {
+    background-color: $color-orange;
+    border: none;
+    color: $color-white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $color-orange-dark;
+    }
+}
+
+section {
+    margin: $section-spacing 0;
+    padding-bottom: $section-spacing;
+    text-align: center;
+}
+
+.pagination {
+    display: flex;
+    justify-content: left;
+    gap: 0.5rem;
+
+    a {
+        color: $color-link;
+        text-decoration: none;
+
+        &:hover {
+            color: $color-link-hover;
+        }
+    }
+}

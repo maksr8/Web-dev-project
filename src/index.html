@@ -7,11 +7,235 @@
    <meta name="msapplication-tap-highlight" content="no">
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <title>Teachinder</title>
+   <link rel="icon" href="/favicon.ico" type="image/x-icon">
    <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
+   <div class="page">
+      <header>
+         <div class="header-upper">
+            <h1 class="logo">Teachinder</h1>
 
+            <form class="search-form">
+               <input type="text" placeholder="Name, note or age to search">
+               <button class="button1" type="submit">Search</button>
+            </form>
+         </div>
+
+         <div class="header-lower">
+            <nav>
+               <ul>
+                  <li><a href="#" class="active">Teachers</a></li>
+                  <li><a href="#">Statistics</a></li>
+                  <li><a href="#">Favorites</a></li>
+                  <li><a href="#">About</a></li>
+               </ul>
+            </nav>
+
+            <button class="button1">Add teacher</button>
+         </div>
+      </header>
+
+      <main>
+         <section>
+            <h2>Top Teachers</h2>
+
+            <form class="filters">
+               <label>Age
+                  <select>
+                     <option>18-31</option>
+                     <option>32-45</option>
+                  </select>
+               </label>
+               <label>Region
+                  <select>
+                     <option>Europe</option>
+                     <option>Asia</option>
+                  </select>
+               </label>
+               <label>Gender
+                  <select>
+                     <option>Male</option>
+                     <option>Female</option>
+                  </select>
+               </label>
+               <label><input type="checkbox"> Only with photo</label>
+               <label><input type="checkbox"> Only favorites</label>
+            </form>
+
+            <div class="teachers">
+               <div class="teacher">
+                  <img src="img/ihor.jpg" alt="Ihor Tkachuk">
+                  <h3>Ihor Tkachuk</h3>
+                  <p>Chemistry</p>
+                  <p>Ukraine</p>
+               </div>
+
+               <div class="teacher">
+                  <img src="img/pragg.jpg" alt="Pragg Rameshbabu">
+                  <h3>Pragg Rameshbabu</h3>
+                  <p>Chess</p>
+                  <p>India</p>
+               </div>
+            </div>
+         </section>
+
+         <section>
+            <h2>Statistics</h2>
+            <table>
+               <thead>
+                  <tr>
+                     <th>Name</th>
+                     <th>Speciality</th>
+                     <th>Age</th>
+                     <th>Gender</th>
+                     <th>Nationality</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>Daisy Alexander</td>
+                     <td>Chemistry</td>
+                     <td>28</td>
+                     <td>Female</td>
+                     <td>Vietnam</td>
+                  </tr>
+                  <tr>
+                     <td>Julia Bradley</td>
+                     <td>Math</td>
+                     <td>26</td>
+                     <td>Female</td>
+                     <td>USA</td>
+                  </tr>
+               </tbody>
+            </table>
+
+            <nav class="pagination">
+               <a href="#">1</a>
+               <a href="#">2</a>
+               <a href="#">3</a>
+               <p>...</p>
+               <a href="#">Last</a>
+            </nav>
+         </section>
+
+         <section>
+            <h2>Favorites</h2>
+            <div class="favorites">
+               <div class="teacher">
+                  <img src="img/ihor.jpg" alt="Ihor Tkachuk">
+                  <h3>Ihor Tkachuk</h3>
+                  <p>Ukraine</p>
+               </div>
+
+               <div class="teacher">
+                  <div class="avatar">A.M</div>
+                  <h3>Anna Makarevich</h3>
+                  <p>Belarus</p>
+               </div>
+            </div>
+         </section>
+         <section>
+            <p>
+               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum, justo et aliquam porttitor, enim
+               nibh dapibus enim, vitae consequat lectus tortor ac velit. Morbi ut posuere nisi. Nulla nisl risus, porta
+               id ultrices euismod, varius eu metus. Nunc ac est quis massa commodo tristique at eget ipsum. Suspendisse
+               elementum, turpis vitae aliquam sagittis, ante tortor mollis purus, commodo rhoncus eros metus a nisi.
+               Quisque augue sem, blandit at eros non, cursus vulputate mauris. Nulla augue risus, lobortis sit amet
+               auctor sed, auctor non quam. Duis a aliquet velit. Integer nec enim vitae enim facilisis interdum.
+            </p>
+         </section>
+      </main>
+
+      <div class="spacer"></div>
+
+      <footer>
+         <nav>
+            <ul>
+               <li><a href="#">Teachers</a></li>
+               <li><a href="#">Statistics</a></li>
+               <li><a href="#">Favorites</a></li>
+               <li><a href="#">About</a></li>
+            </ul>
+         </nav>
+         <button class="add-btn">Add teacher</button>
+      </footer>
+   </div>
+   <div id="teacher-info" class="popup hidden">
+      <div class="popup-content">
+         <img src="img/ihor.jpg" alt="Ihor Tkachuk">
+         <h2>Ihor Tkachuk</h2>
+         <button class="close">&times;</button>
+         <p><strong>Chemistry</strong></p>
+         <p>Kyiv, Ukraine</p>
+         <p>35, Male</p>
+         <a href="mailto:ihor_tkachuk@domain.com">ihor_tkachuk@domain.com</a><br>
+         <p>+380964949532</p>
+         <p class="teacher-desc">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum, justo et aliquam porttitor, enim nibh
+            dapibus enim, vitae consequat lectus tortor ac velit. Morbi ut posuere nisi. Nulla nisl risus, porta id
+            ultrices euismod, varius eu metus. Nunc ac est quis massa commodo tristique at eget ipsum. Suspendisse
+            elementum, turpis vitae aliquam sagittis, ante tortor mollis purus, commodo rhoncus eros metus a nisi.
+            Quisque augue sem, blandit at eros non, cursus vulputate mauris. Nulla augue risus, lobortis sit amet auctor
+            sed, auctor non quam. Duis a aliquet velit. Integer nec enim vitae enim facilisis interdum.
+         </p>
+         <a href="#" class="toggle-map">Toggle map</a>
+      </div>
+   </div>
+
+   <div id="add-teacher" class="popup hidden">
+      <div class="popup-content">
+         <button class="close">&times;</button>
+         <h2>Add Teacher</h2>
+
+         <form>
+            <fieldset>
+               <legend>Personal data</legend>
+               <label>Name <input type="text" required></label>
+               <label>Speciality
+                  <select>
+                     <option>Mathematics</option>
+                     <option>Chemistry</option>
+                     <option>Physics</option>
+                  </select>
+               </label>
+            </fieldset>
+
+            <fieldset>
+               <legend>Contact and address</legend>
+               <div class="row">
+                  <label>Country
+                     <select>
+                        <option>Ukraine</option>
+                        <option>Poland</option>
+                     </select>
+                  </label>
+                  <label>City <input type="text"></label>
+               </div>
+               <div class="row">
+                  <label>Email <input type="email"></label>
+                  <label>Phone <input type="tel"></label>
+               </div>
+            </fieldset>
+
+            <fieldset>
+               <legend>Additional info</legend>
+               <label>Date of birth <input type="text" placeholder="dd/mm/yyyy"></label>
+               <div>
+                  <label><input type="radio" name="sex"> Male</label>
+                  <label><input type="radio" name="sex"> Female</label>
+               </div>
+               <label>Background color <input type="color"></label>
+               <label>Notes (optional)
+                  <textarea></textarea>
+               </label>
+            </fieldset>
+
+            <button type="submit" class="submit-btn">Add</button>
+         </form>
+      </div>
+   </div>
 
    <script type="text/javascript" src="./js/app.js"></script>
 </body>
