@@ -24,7 +24,7 @@
          </div>
 
          <div class="header-lower">
-            <nav>
+            <nav class="nav1">
                <ul>
                   <li><a href="#" class="active">Teachers</a></li>
                   <li><a href="#">Statistics</a></li>
@@ -38,7 +38,8 @@
       </header>
 
       <main>
-         <section>
+         <hr class="divider">
+         <section class="top-teachers">
             <h2>Top Teachers</h2>
 
             <form class="filters">
@@ -66,51 +67,207 @@
 
             <div class="teachers">
                <div class="teacher">
-                  <img src="img/ihor.jpg" alt="Ihor Tkachuk">
-                  <h3>Ihor Tkachuk</h3>
-                  <p>Chemistry</p>
-                  <p>Ukraine</p>
+                  <div class="img-wrapper">
+                     <img src="images/sticker.webp" alt="Ihor Tkachuk">
+                  </div>
+                  <div>
+                     <h3 class="name">Ihor</h3>
+                     <h3 class="surname">Tkachuk</h3>
+                  </div>
+                  <div>
+                     <p class="subject">Chemistry</p>
+                     <p class="location">Ukraine</p>
+                  </div>
+               </div>
+
+               <div class="teacher favourite">
+                  <div class="img-wrapper">
+                     <img src="images/sticker.webp" alt="Pragg Rameshbabu">
+                  </div>
+                  <div>
+                     <h3 class="name">Pragg</h3>
+                     <h3 class="surname">Rameshbabu</h3>
+                  </div>
+                  <div>
+                     <p class="subject">Chess</p>
+                     <p class="location">India</p>
+                  </div>
+               </div>
+
+               <div class="teacher favourite">
+                  <div class="img-wrapper">
+                     <img src="images/sticker.webp" alt="Pragg Rameshbabu">
+                  </div>
+                  <div>
+                     <h3 class="name">Mr</h3>
+                     <h3 class="surname">Pen</h3>
+                  </div>
+                  <div>
+                     <p class="subject">Chess</p>
+                     <p class="location">India</p>
+                  </div>
                </div>
 
                <div class="teacher">
-                  <img src="img/pragg.jpg" alt="Pragg Rameshbabu">
-                  <h3>Pragg Rameshbabu</h3>
-                  <p>Chess</p>
-                  <p>India</p>
+                  <div class="img-wrapper">
+                     <img src="images/sticker.webp" alt="Pragg Rameshbabu">
+                  </div>
+                  <div>
+                     <h3 class="name">Pragg</h3>
+                     <h3 class="surname">Rameshbabu</h3>
+                  </div>
+                  <div>
+                     <p class="subject">Chess</p>
+                     <p class="location">India</p>
+                  </div>
                </div>
+
+               <div class="teacher favourite">
+                  <div class="img-wrapper">
+                     <img src="images/sticker.webp" alt="Pragg Rameshbabu">
+                  </div>
+                  <div>
+                     <h3 class="name">Pragg</h3>
+                     <h3 class="surname">Rameshbabu</h3>
+                  </div>
+                  <div>
+                     <p class="subject">Chess</p>
+                     <p class="location">India</p>
+                  </div>
+               </div>
+
+               <div class="teacher">
+                  <div class="img-wrapper">
+                     <img src="images/sticker.webp" alt="Pragg Rameshbabu">
+                  </div>
+                  <div>
+                     <h3 class="name">Pragg</h3>
+                     <h3 class="surname">Rameshbabu</h3>
+                  </div>
+                  <div>
+                     <p class="subject">Chess</p>
+                     <p class="location">India</p>
+                  </div>
+               </div>
+
+               <div class="teacher favourite">
+                  <div class="img-wrapper">
+                     <div class="no-avatar">P.R</div>
+                  </div>
+                  <div>
+                     <h3 class="name">Pragg</h3>
+                     <h3 class="surname">Rameshbabu</h3>
+                  </div>
+                  <div>
+                     <p class="subject">Chess</p>
+                     <p class="location">India</p>
+                  </div>
+               </div>
+
+               <div class="teacher">
+                  <div class="img-wrapper">
+                     <div class="no-avatar">P.R</div>
+                  </div>
+                  <div>
+                     <h3 class="name">Pragg</h3>
+                     <h3 class="surname">Rameshbabu</h3>
+                  </div>
+                  <div>
+                     <p class="subject">Chess</p>
+                     <p class="location">India</p>
+                  </div>
+               </div>
+
             </div>
          </section>
-
-         <section>
+         <hr class="divider">
+         <section class="statistics">
             <h2>Statistics</h2>
-            <table>
-               <thead>
-                  <tr>
-                     <th>Name</th>
-                     <th>Speciality</th>
-                     <th>Age</th>
-                     <th>Gender</th>
-                     <th>Nationality</th>
-                  </tr>
-               </thead>
-               <tbody>
-                  <tr>
-                     <td>Daisy Alexander</td>
-                     <td>Chemistry</td>
-                     <td>28</td>
-                     <td>Female</td>
-                     <td>Vietnam</td>
-                  </tr>
-                  <tr>
-                     <td>Julia Bradley</td>
-                     <td>Math</td>
-                     <td>26</td>
-                     <td>Female</td>
-                     <td>USA</td>
-                  </tr>
-               </tbody>
-            </table>
-
+            <div class="table-wrapper">
+               <table>
+                  <thead>
+                     <tr>
+                        <th class="sortable sorted-asc">Name</th>
+                        <th class="sortable non-sorted">Speciality</th>
+                        <th class="sortable sorted-desc">Age</th>
+                        <th class="sortable non-sorted">Gender</th>
+                        <th>Nationality</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td>Daisy Alexander</td>
+                        <td>Chemistry</td>
+                        <td>28</td>
+                        <td>Female</td>
+                        <td>Vietnam</td>
+                     </tr>
+                     <tr>
+                        <td>Julia Bradley</td>
+                        <td>Math</td>
+                        <td>26</td>
+                        <td>Female</td>
+                        <td>USA</td>
+                     </tr>
+                     <tr>
+                        <td>Rita Hart</td>
+                        <td>Art</td>
+                        <td>41</td>
+                        <td>Female</td>
+                        <td>Ireland</td>
+                     </tr>
+                     <tr>
+                        <td>Jonathan Jacobs</td>
+                        <td>Math</td>
+                        <td>32</td>
+                        <td>Male</td>
+                        <td>England</td>
+                     </tr>
+                     <tr>
+                        <td>Nathaniel White</td>
+                        <td>Computer Science</td>
+                        <td>37</td>
+                        <td>Male</td>
+                        <td>Austria</td>
+                     </tr>
+                     <tr>
+                        <td>Frank Medina</td>
+                        <td>English</td>
+                        <td>43</td>
+                        <td>Male</td>
+                        <td>Italy</td>
+                     </tr>
+                     <tr>
+                        <td>Ella Curtis</td>
+                        <td>Chess</td>
+                        <td>34</td>
+                        <td>Female</td>
+                        <td>USA</td>
+                     </tr>
+                     <tr>
+                        <td>Claire Simmmons</td>
+                        <td>Art</td>
+                        <td>38</td>
+                        <td>Female</td>
+                        <td>Netherlands</td>
+                     </tr>
+                     <tr>
+                        <td>Benjamin Knight</td>
+                        <td>Biology</td>
+                        <td>44</td>
+                        <td>Male</td>
+                        <td>Scotland</td>
+                     </tr>
+                     <tr>
+                        <td>Norma Rose</td>
+                        <td>Statistics</td>
+                        <td>36</td>
+                        <td>Female</td>
+                        <td>France</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
             <nav class="pagination">
                <a href="#">1</a>
                <a href="#">2</a>
@@ -119,29 +276,145 @@
                <a href="#">Last</a>
             </nav>
          </section>
-
-         <section>
+         <hr class="divider">
+         <section class="section-favorites">
             <h2>Favorites</h2>
-            <div class="favorites">
-               <div class="teacher">
-                  <img src="img/ihor.jpg" alt="Ihor Tkachuk">
-                  <h3>Ihor Tkachuk</h3>
-                  <p>Ukraine</p>
-               </div>
+            <div class="favorites-wrapper">
+               <div class="scroll-arrow prev-arrow">&lt;</div>
+               <div class="favorites">
+                  <div class="teacher">
+                     <div class="img-wrapper">
+                        <img src="images/sticker.webp" alt="Pragg Rameshbabu">
+                     </div>
+                     <div>
+                        <h3 class="name">Mr</h3>
+                        <h3 class="surname">Pen</h3>
+                     </div>
+                     <div>
+                        <p class="location">India</p>
+                     </div>
+                  </div>
 
-               <div class="teacher">
-                  <div class="avatar">A.M</div>
-                  <h3>Anna Makarevich</h3>
-                  <p>Belarus</p>
+                  <div class="teacher">
+                     <div class="img-wrapper">
+                        <div class="no-avatar">P.R</div>
+                     </div>
+                     <div>
+                        <h3 class="name">Pragg</h3>
+                        <h3 class="surname">Rameshbabu</h3>
+                     </div>
+                     <div>
+                        <p class="location">India</p>
+                     </div>
+                  </div>
+
+                  <div class="teacher">
+                     <div class="img-wrapper">
+                        <img src="images/sticker.webp" alt="Pragg Rameshbabu">
+                     </div>
+                     <div>
+                        <h3 class="name">Mr</h3>
+                        <h3 class="surname">Pen</h3>
+                     </div>
+                     <div>
+                        <p class="location">India</p>
+                     </div>
+                  </div>
+
+                  <div class="teacher">
+                     <div class="img-wrapper">
+                        <img src="images/sticker.webp" alt="Pragg Rameshbabu">
+                     </div>
+                     <div>
+                        <h3 class="name">Mr</h3>
+                        <h3 class="surname">Pen</h3>
+                     </div>
+                     <div>
+                        <p class="location">India</p>
+                     </div>
+                  </div>
+
+                  <div class="teacher">
+                     <div class="img-wrapper">
+                        <img src="images/sticker.webp" alt="Pragg Rameshbabu">
+                     </div>
+                     <div>
+                        <h3 class="name">Mr</h3>
+                        <h3 class="surname">Pen</h3>
+                     </div>
+                     <div>
+                        <p class="location">India</p>
+                     </div>
+                  </div>
+
+                  <div class="teacher">
+                     <div class="img-wrapper">
+                        <img src="images/sticker.webp" alt="Pragg Rameshbabu">
+                     </div>
+                     <div>
+                        <h3 class="name">Mr</h3>
+                        <h3 class="surname">Pen</h3>
+                     </div>
+                     <div>
+                        <p class="location">India</p>
+                     </div>
+                  </div>
+
+                  <div class="teacher">
+                     <div class="img-wrapper">
+                        <img src="images/sticker.webp" alt="Pragg Rameshbabu">
+                     </div>
+                     <div>
+                        <h3 class="name">Mr</h3>
+                        <h3 class="surname">Pen</h3>
+                     </div>
+                     <div>
+                        <p class="location">India</p>
+                     </div>
+                  </div>
+
+                  <div class="teacher">
+                     <div class="img-wrapper">
+                        <img src="images/sticker.webp" alt="Pragg Rameshbabu">
+                     </div>
+                     <div>
+                        <h3 class="name">Mr</h3>
+                        <h3 class="surname">Pen</h3>
+                     </div>
+                     <div>
+                        <p class="location">India</p>
+                     </div>
+                  </div>
+
+                  <div class="teacher">
+                     <div class="img-wrapper">
+                        <img src="images/sticker.webp" alt="Pragg Rameshbabu">
+                     </div>
+                     <div>
+                        <h3 class="name">Mr</h3>
+                        <h3 class="surname">Pen</h3>
+                     </div>
+                     <div>
+                        <p class="location">India</p>
+                     </div>
+                  </div>
+
                </div>
+               <div class="scroll-arrow next-arrow">&gt;</div>
             </div>
          </section>
-         <section>
+         <hr class="divider">
+         <section class="about">
             <p>
                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum, justo et aliquam porttitor, enim
-               nibh dapibus enim, vitae consequat lectus tortor ac velit. Morbi ut posuere nisi. Nulla nisl risus, porta
+               nibh dapibus enim, vitae consequat lectus tortor ac velit.
+            </p>
+            <p>
+               Morbi ut posuere nisi. Nulla nisl risus, porta
                id ultrices euismod, varius eu metus. Nunc ac est quis massa commodo tristique at eget ipsum. Suspendisse
                elementum, turpis vitae aliquam sagittis, ante tortor mollis purus, commodo rhoncus eros metus a nisi.
+            </p>
+            <p>
                Quisque augue sem, blandit at eros non, cursus vulputate mauris. Nulla augue risus, lobortis sit amet
                auctor sed, auctor non quam. Duis a aliquet velit. Integer nec enim vitae enim facilisis interdum.
             </p>
@@ -151,7 +424,7 @@
       <div class="spacer"></div>
 
       <footer>
-         <nav>
+         <nav class="nav1">
             <ul>
                <li><a href="#">Teachers</a></li>
                <li><a href="#">Statistics</a></li>
@@ -159,81 +432,88 @@
                <li><a href="#">About</a></li>
             </ul>
          </nav>
-         <button class="add-btn">Add teacher</button>
+         <button class="button1">Add teacher</button>
       </footer>
    </div>
-   <div id="teacher-info" class="popup hidden">
-      <div class="popup-content">
-         <img src="img/ihor.jpg" alt="Ihor Tkachuk">
-         <h2>Ihor Tkachuk</h2>
-         <button class="close">&times;</button>
-         <p><strong>Chemistry</strong></p>
-         <p>Kyiv, Ukraine</p>
-         <p>35, Male</p>
-         <a href="mailto:ihor_tkachuk@domain.com">ihor_tkachuk@domain.com</a><br>
-         <p>+380964949532</p>
-         <p class="teacher-desc">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum, justo et aliquam porttitor, enim nibh
-            dapibus enim, vitae consequat lectus tortor ac velit. Morbi ut posuere nisi. Nulla nisl risus, porta id
-            ultrices euismod, varius eu metus. Nunc ac est quis massa commodo tristique at eget ipsum. Suspendisse
-            elementum, turpis vitae aliquam sagittis, ante tortor mollis purus, commodo rhoncus eros metus a nisi.
-            Quisque augue sem, blandit at eros non, cursus vulputate mauris. Nulla augue risus, lobortis sit amet auctor
-            sed, auctor non quam. Duis a aliquet velit. Integer nec enim vitae enim facilisis interdum.
-         </p>
-         <a href="#" class="toggle-map">Toggle map</a>
+
+   <div class="popup teacher-info-popup hidden" role="dialog">
+      <div class="popup-window">
+         <div class="popup-header">
+            <h2>Teacher Info</h2>
+            <button class="close">&times;</button>
+         </div>
+         <div class="popup-content">
+            <div class="div-img-and-info">
+               <img src="images/sticker.webp" alt="Ihor Tkachuk">
+               <div class="div-info">
+                  <div class="div-name-and-star">
+                     <h2>Ihor Tkachuk</h2>
+                     <div class="star-filled hidden">&#9733;</div>
+                     <div class="star-empty">&#9734;</div>
+                  </div>
+                  <p class="subject">Chemistry</p>
+                  <p>Kyiv, Ukraine</p>
+                  <p>35, Male</p>
+                  <a href="mailto:ihor_tkachuk@domain.com">ihor_tkachuk@domain.com</a>
+                  <p>+380964949532</p>
+               </div>
+            </div>
+            <p class="teacher-desc">
+               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum, justo et aliquam porttitor,
+               enim
+               nibh
+               dapibus enim, vitae consequat lectus tortor ac velit. Morbi ut posuere nisi. Nulla nisl risus, porta
+               id
+               ultrices euismod, varius eu metus. Nunc ac est quis massa commodo tristique at eget ipsum. Suspendisse
+               elementum, turpis vitae aliquam sagittis, ante tortor mollis purus, commodo rhoncus eros metus a nisi.
+               Quisque augue sem, blandit at eros non, cursus vulputate mauris. Nulla augue risus, lobortis sit amet
+               auctor
+               sed, auctor non quam. Duis a aliquet velit. Integer nec enim vitae enim facilisis interdum.
+            </p>
+            <a href="#" class="toggle-map">toggle map</a>
+         </div>
       </div>
    </div>
 
-   <div id="add-teacher" class="popup hidden">
-      <div class="popup-content">
-         <button class="close">&times;</button>
-         <h2>Add Teacher</h2>
-
-         <form>
-            <fieldset>
-               <legend>Personal data</legend>
-               <label>Name <input type="text" required></label>
-               <label>Speciality
+   <div class="popup add-teacher-popup hidden" role="dialog">
+      <div class="popup-window">
+         <div class="popup-header">
+            <h2>Add Teacher</h2>
+            <button class="close">&times;</button>
+         </div>
+         <div class="popup-content">
+            <form>
+               <label class="full-width">Name <input type="text" placeholder="Enter name" required></label>
+               <label class="full-width">Speciality
                   <select>
                      <option>Mathematics</option>
                      <option>Chemistry</option>
                      <option>Physics</option>
                   </select>
                </label>
-            </fieldset>
+               <label>Country
+                  <select>
+                     <option>Ukraine</option>
+                     <option>Poland</option>
+                  </select>
+               </label>
+               <label>City <input type="text"></label>
 
-            <fieldset>
-               <legend>Contact and address</legend>
-               <div class="row">
-                  <label>Country
-                     <select>
-                        <option>Ukraine</option>
-                        <option>Poland</option>
-                     </select>
-                  </label>
-                  <label>City <input type="text"></label>
+               <label>Email <input type="email"></label>
+               <label>Phone <input type="tel"></label>
+               <label>Date of birth <input type="date"></label>
+               <div class="sex">Sex
+                  <label>Male <input type="radio" name="sex"></label>
+                  <label>Female <input type="radio" name="sex"></label>
                </div>
-               <div class="row">
-                  <label>Email <input type="email"></label>
-                  <label>Phone <input type="tel"></label>
-               </div>
-            </fieldset>
-
-            <fieldset>
-               <legend>Additional info</legend>
-               <label>Date of birth <input type="text" placeholder="dd/mm/yyyy"></label>
-               <div>
-                  <label><input type="radio" name="sex"> Male</label>
-                  <label><input type="radio" name="sex"> Female</label>
-               </div>
-               <label>Background color <input type="color"></label>
-               <label>Notes (optional)
+               <label class="color-picker">Background color <input type="color"></label>
+               <label class="full-width">Notes (optional)
                   <textarea></textarea>
                </label>
-            </fieldset>
 
-            <button type="submit" class="submit-btn">Add</button>
-         </form>
+               <button type="submit" class="button1 full-width">Add</button>
+            </form>
+         </div>
       </div>
    </div>
 

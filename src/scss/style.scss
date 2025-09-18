@@ -1,10 +1,10 @@
+@use "variables";
+@use "popup";
+@use "layout";
+@use "components";
+@use "utilities";
 /* Import fonts */
 @import url('../fonts/Roboto.css');
 
 /* Reset and normalize */
 @import url('./normalize.css');
-@import "variables";
-@import "popup";
-@import "layout";
-@import "components";
-@import "utilities";
