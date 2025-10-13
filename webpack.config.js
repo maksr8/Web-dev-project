@@ -21,7 +21,9 @@ const CONFIG = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/index.html",
+      inject: "body",
       filename: "./index.html",
+      favicon: "./src/favicon.ico",
       minify: {
         collapseWhitespace: true,
         minifyCSS: true,
@@ -122,10 +124,14 @@ if (!devMode) {
   CONFIG.output.filename = "js/app.js";
   CONFIG.plugins.push(new MinifyPlugin());
   CONFIG.module.rules.push({
-    test: [/\.js$/],
-    exclude: [/node_modules/],
-    loader: "babel-loader",
-    options: { presets: ["env"] },
+    test: /\.js$/,
+    exclude: /node_modules/,
+    use: {
+      loader: "babel-loader",
+      options: {
+        presets: ["@babel/preset-env"],
+      },
+    },
   });
 }
 
