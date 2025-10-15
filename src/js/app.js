@@ -7,6 +7,7 @@ import { sortUsersBy } from './logic/sort.js';
 import { searchUsers } from './logic/search.js';
 import { setupUIEvents } from './ui/events.js';
 import { setUsers } from './data/data.js';
+import { renderTeachers, renderFilters, renderTable } from './ui/render.js';
 
 
 const users = getAllUsers(randomUserMock, additionalUsers);
@@ -31,7 +32,8 @@ const filters = {
   country: ['Germany', 'France', 'Iran'],
   age: [20, 65],
   gender: ['Male', 'Female'],
-  favorite: [true, false]
+  favorite: [true, false],
+  with_picture: [false, true]
 };
 console.log('Filtered users:')
 console.log(filterUsersBy(validUsers, filters));
@@ -76,9 +78,13 @@ function getPercentFiltered(users, options = {}) {
 
 
 
-
+validUsers.find(u => u.id === 5).picture_large = null;
 setUsers(validUsers);
 
 document.addEventListener('DOMContentLoaded', () => {
+  renderTeachers(false);
+  renderTeachers(true);
+  renderFilters();
+  renderTable();
   setupUIEvents();
 });

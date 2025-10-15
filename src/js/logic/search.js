@@ -18,6 +18,23 @@ function searchUsers(users, query) {
     });
 }
 
-export {
-    searchUsers
-};
+function searchUsersByNameNoteAge(users, query) {
+    const lowerQuery = String(query).toLowerCase().trim();
+
+    return users.filter(user => {
+        for (const key in user) {
+            if (key !== 'full_name' && key !== 'note' && key !== 'age') {
+                continue;
+            }
+            const value = user[key];
+
+            if (String(value).toLowerCase().includes(lowerQuery)) {
+                return true;
+            }
+        }
+
+        return false;
+    });
+}
+
+export { searchUsers, searchUsersByNameNoteAge };

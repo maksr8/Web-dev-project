@@ -50,6 +50,10 @@
   min-width: 500px;
   max-height: 90vh;
 }
+.teacher-info-popup .popup-content {
+  max-height: 70vh;
+  overflow-y: auto;
+}
 .teacher-info-popup .div-img-and-info {
   width: 100%;
   display: flex;
@@ -88,6 +92,7 @@
 .teacher-info-popup .div-info .div-name-and-star .star-empty {
   font-size: 2rem;
   color: #f4c542;
+  cursor: pointer;
 }
 .teacher-info-popup p {
   font-size: 0.75rem;
@@ -112,6 +117,9 @@
 }
 .teacher-info-popup .toggle-map:hover {
   color: #111;
+}
+.teacher-info-popup .map-wrapper {
+  width: 100%;
 }
 
 .add-teacher-popup .popup-window {
@@ -306,6 +314,7 @@ section {
 .favorites {
   display: flex;
   overflow-x: scroll;
+  scroll-behavior: smooth;
   gap: 4rem;
   padding-left: 1rem;
   scrollbar-width: none;
@@ -690,4 +699,10 @@ footer {
 
 .hidden {
   display: none;
+}
+
+.no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }/*# sourceMappingURL=style.css.map */

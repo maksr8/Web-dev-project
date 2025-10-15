@@ -1,5 +1,8 @@
 import { handlePopupClick } from './popups.js';
-import { handleTeacherImageClick, handleAddTeacherClick } from './teachers.js';
+import { handleTeacherImageClick, handleFavoritesClick, handleAddTeacherClick } from './teachers.js';
+import { handleFormChange } from './filters.js';
+import { handleSearch } from './searching.js';
+import { handleTableClick } from './statistics.js';
 
 function setupUIEvents() {
     const teachersContainer = document.querySelector('.teachers');
@@ -9,12 +12,12 @@ function setupUIEvents() {
 
     const favoritesContainer = document.querySelector('.favorites-wrapper');
     if (favoritesContainer) {
-        favoritesContainer.addEventListener('click', handleTeacherImageClick);
+        favoritesContainer.addEventListener('click', handleFavoritesClick);
     }
 
-    const headerActions = document.querySelector('.header-lower');
-    if (headerActions) {
-        headerActions.addEventListener('click', handleAddTeacherClick);
+    const headerLower = document.querySelector('.header-lower');
+    if (headerLower) {
+        headerLower.addEventListener('click', handleAddTeacherClick);
     }
 
     const footer = document.querySelector('footer');
@@ -26,6 +29,21 @@ function setupUIEvents() {
     popups.forEach(popup => {
         popup.addEventListener('click', handlePopupClick);
     });
+
+    const filtersForm = document.querySelector('.filters');
+    if (filtersForm) {
+        filtersForm.addEventListener('change', handleFormChange);
+    }
+
+    const headerUpper = document.querySelector('.header-upper');
+    if (headerUpper) {
+        headerUpper.addEventListener('submit', handleSearch);
+    }
+
+    const statisticsTable = document.querySelector('.statistics .table-wrapper');
+    if (statisticsTable) {
+        statisticsTable.addEventListener('click', handleTableClick);
+    }
 }
 
 export { setupUIEvents };

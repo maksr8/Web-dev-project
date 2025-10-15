@@ -31,6 +31,10 @@ function filterUsersBy(users, filters) {
             return false;
         }
 
+        if (filters.with_picture && !filters.with_picture.includes(!!u.picture_large)) {
+            return false;
+        }
+
         return true;
     });
 }

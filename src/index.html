@@ -15,11 +15,11 @@
    <div class="page">
       <header>
          <div class="header-upper">
-            <h1 class="logo">Teachinder</h1>
+            <h1 class="logo no-select">Teachinder</h1>
 
             <form class="search-form">
                <input type="text" placeholder="Name, note or age to search">
-               <button class="button1" type="submit">Search</button>
+               <button class="button1 no-select" type="submit">Search</button>
             </form>
          </div>
 
@@ -33,7 +33,7 @@
                </ul>
             </nav>
 
-            <button class="button1 add-teacher-button">Add teacher</button>
+            <button class="button1 add-teacher-button no-select">Add teacher</button>
          </div>
       </header>
 
@@ -43,30 +43,34 @@
             <h2>Top Teachers</h2>
 
             <form class="filters">
-               <label>Age
+               <label class="filter-age">Age
                   <select>
-                     <option>18-31</option>
-                     <option>32-45</option>
+                     <option>All</option>
+                     <option>18-30</option>
+                     <option>31-45</option>
+                     <option>46-60</option>
+                     <option>61-75</option>
+                     <option>76-90</option>
                   </select>
                </label>
-               <label>Region
+               <label class="filter-country">Country
                   <select>
-                     <option>Europe</option>
-                     <option>Asia</option>
+                     <option>All</option>
                   </select>
                </label>
-               <label>Gender
+               <label class="filter-gender">Gender
                   <select>
+                     <option>All</option>
                      <option>Male</option>
                      <option>Female</option>
                   </select>
                </label>
-               <label><input type="checkbox"> Only with photo</label>
-               <label><input type="checkbox"> Only favorites</label>
+               <label class="filter-with-picture"><input type="checkbox"> Only with photo</label>
+               <label class="filter-favorite"><input type="checkbox"> Only favorites</label>
             </form>
 
             <div class="teachers">
-               <div class="teacher">
+               <div class="teacher" data-id="7">
                   <div class="img-wrapper">
                      <img src="images/sticker.webp" alt="Ihor Tkachuk">
                   </div>
@@ -190,8 +194,8 @@
                         <th class="sortable sorted-asc">Name</th>
                         <th class="sortable non-sorted">Speciality</th>
                         <th class="sortable sorted-desc">Age</th>
-                        <th class="sortable non-sorted">Gender</th>
-                        <th>Nationality</th>
+                        <th class="sortable non-sorted">Birth Date</th>
+                        <th class="sortable non-sorted">Nationality</th>
                      </tr>
                   </thead>
                   <tbody>
@@ -199,14 +203,14 @@
                         <td>Daisy Alexander</td>
                         <td>Chemistry</td>
                         <td>28</td>
-                        <td>Female</td>
+                        <td>15.05.1995</td>
                         <td>Vietnam</td>
                      </tr>
                      <tr>
                         <td>Julia Bradley</td>
                         <td>Math</td>
                         <td>26</td>
-                        <td>Female</td>
+                        <td>12.08.1997</td>
                         <td>USA</td>
                      </tr>
                      <tr>
@@ -280,7 +284,7 @@
          <section class="section-favorites">
             <h2>Favorites</h2>
             <div class="favorites-wrapper">
-               <div class="scroll-arrow prev-arrow">&lt;</div>
+               <div class="scroll-arrow prev-arrow no-select">&lt;</div>
                <div class="favorites">
                   <div class="teacher">
                      <div class="img-wrapper">
@@ -400,7 +404,7 @@
                   </div>
 
                </div>
-               <div class="scroll-arrow next-arrow">&gt;</div>
+               <div class="scroll-arrow next-arrow no-select">&gt;</div>
             </div>
          </section>
          <hr class="divider">
@@ -432,24 +436,24 @@
                <li><a href="#">About</a></li>
             </ul>
          </nav>
-         <button class="button1 add-teacher-button">Add teacher</button>
+         <button class="button1 add-teacher-button no-select">Add teacher</button>
       </footer>
    </div>
 
-   <div class="popup teacher-info-popup hidden" role="dialog">
+   <div class="popup teacher-info-popup hidden" data-id="0" role="dialog">
       <div class="popup-window">
          <div class="popup-header">
             <h2>Teacher Info</h2>
-            <button class="close">&times;</button>
+            <button class="close no-select">&times;</button>
          </div>
          <div class="popup-content">
             <div class="div-img-and-info">
                <img src="images/sticker.webp" alt="Ihor Tkachuk">
                <div class="div-info">
                   <div class="div-name-and-star">
-                     <h2>Ihor Tkachuk</h2>
-                     <div class="star-filled hidden">&#9733;</div>
-                     <div class="star-empty">&#9734;</div>
+                     <h2 class="teacher-fullname">Ihor Tkachuk</h2>
+                     <div class="star star-filled no-select hidden">&#9733;</div>
+                     <div class="star star-empty no-select">&#9734;</div>
                   </div>
                   <p class="subject">Chemistry</p>
                   <p>Kyiv, Ukraine</p>
@@ -471,6 +475,11 @@
                sed, auctor non quam. Duis a aliquet velit. Integer nec enim vitae enim facilisis interdum.
             </p>
             <a href="#" class="toggle-map">toggle map</a>
+            <div class="map-wrapper hidden">
+               <iframe src="https://www.google.com/maps/embed/v1/place?q=Kyiv,Ukraine&key=AIzaSyD-FAKE-KEY-FOR-DEV"
+                  width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
          </div>
       </div>
    </div>
@@ -511,7 +520,7 @@
                   <textarea></textarea>
                </label>
 
-               <button type="submit" class="button1 full-width">Add</button>
+               <button type="submit" class="button1 full-width no-select">Add</button>
             </form>
          </div>
       </div>
