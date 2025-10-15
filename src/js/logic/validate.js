@@ -3,6 +3,9 @@ import { parsePhoneNumberFromString } from 'libphonenumber-js';
 function isValid(user, stringKeysToValid) {
     for (const key of stringKeysToValid) {
         const val = user[key];
+        if (!val) {
+            continue;
+        }
         if (typeof val !== 'string') {
             return false;
         }

@@ -208,6 +208,11 @@
 .add-teacher-popup form .button1 {
   margin-top: 2rem;
 }
+.add-teacher-popup form .not-valid {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #111;
+}
 
 body {
   display: grid;

@@ -130,7 +130,15 @@ function repairPhone(user, countryCodes) {
     return user;
 }
 
+function calcAgeByBirthDate(b_date) {
+    const birthDate = new Date(b_date);
+    const ageDiff = Date.now() - birthDate.getTime();
+    const ageDate = new Date(ageDiff);
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
+}
+
 export {
     getAllUsers,
     repairInvalidGenderAndPhone,
+    calcAgeByBirthDate
 };

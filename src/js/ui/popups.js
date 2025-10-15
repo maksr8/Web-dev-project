@@ -1,5 +1,8 @@
-import { getTeacherById } from '../data/data.js';
-import { renderTeachers } from './render.js';
+import { getTeacherById, addUser, getUsers } from '../data/data.js';
+import { renderTable, renderTeachers } from './render.js';
+import { isValid } from '../logic/validate.js';
+import { STRING_KEYS_TO_VALID } from '../data/constants.js';
+import { calcAgeByBirthDate } from '../data/users.js';
 
 function openPopup(popup) {
     popup.classList.remove('hidden');
@@ -109,4 +112,78 @@ function handlePopupClick(e) {
     }
 }
 
-export { openPopup, closePopup, handlePopupClick, openPopupWithTeacher };
+function handleAddTeacherSubmit(e) {
+    e.preventDefault();
+    const form = e.target.closest('form');
+    if (!form) return;
+
+    const getInput = (selector) => {
+        const label = form.querySelector(selector);
+        if (!label) return '';
+        const input = label.querySelector('input, select, textarea');
+        return input ? input.value.trim() : '';
+    };
+
+    const full_name = getInput('.name');
+    const course = getInput('.course');
+    const country = getInput('.country');
+    const city = getInput('.city');
+    const email = getInput('.email');
+    const phone = getInput('.phone');
+    const b_date = getInput('.date-of-birth');
+    const note = getInput('.note');
+
+    let gender = '';
+    const sexDiv = form.querySelector('.sex');
+    if (sexDiv) {
+        const checked = sexDiv.querySelector('input[name="sex"]:checked');
+        if (checked) {
+            const parentLabel = checked.closest('label');
+            if (parentLabel) {
+                gender = parentLabel.textContent.trim();
+            }
+        }
+    }
+
+    const colorLabel = form.querySelector('.color-picker');
+    let color = undefined;
+    if (colorLabel) {
+        const colorInput = colorLabel.querySelector('input[type="color"]');
+        if (colorInput) color = colorInput.value;
+    }
+    if (!color) {
+        color = '#000000';
+    }
+
+    let newTeacher = {
+        id: Date.now(),
+        full_name: full_name,
+        course: course,
+        country: country,
+        city: city,
+        email: email,
+        phone: phone,
+        b_date: b_date,
+        gender: gender,
+        color: color,
+        note: note,
+        picture_large: '',
+        favorite: false,
+        age: calcAgeByBirthDate(b_date)
+    };
+
+    if (!isValid(newTeacher, STRING_KEYS_TO_VALID)) {
+        alert('Not valid!');
+        return;
+    }
+
+    addUser(newTeacher);
+
+    renderTeachers(false);
+    renderTable();
+    const popup = form.closest('.popup');
+    closePopup(popup);
+    form.reset();
+}
+
+export { openPopup, closePopup, handlePopupClick, openPopupWithTeacher, handleAddTeacherSubmit };

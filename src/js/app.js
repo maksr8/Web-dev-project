@@ -7,7 +7,7 @@ import { sortUsersBy } from './logic/sort.js';
 import { searchUsers } from './logic/search.js';
 import { setupUIEvents } from './ui/events.js';
 import { setUsers } from './data/data.js';
-import { renderTeachers, renderFilters, renderTable } from './ui/render.js';
+import { renderTeachers, renderFilters, renderTable, renderAddTeacherForm } from './ui/render.js';
 
 
 const users = getAllUsers(randomUserMock, additionalUsers);
@@ -86,5 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
   renderTeachers(true);
   renderFilters();
   renderTable();
+  renderAddTeacherForm();
   setupUIEvents();
 });

@@ -1,3 +1,4 @@
+import { COURSES } from "../data/constants.js";
 import { getUsers } from "../data/data";
 import { getAllCountries } from "../data/data.js";
 import { getFilteredUsers } from "./filters.js";
@@ -178,4 +179,37 @@ function renderTable(users = getUsers(), sortState = { key: null, direction: nul
     wrapper.appendChild(table);
 }
 
-export { renderTeachers, renderFilters, renderTable };
+function renderAddTeacherForm() {
+    const form = document.querySelector('.add-teacher-popup form');
+    if (!form) return;
+    form.reset();
+    const countrySelect = form.querySelector('.country select');
+    if (countrySelect) {
+        const countries = getAllCountries();
+        countrySelect.innerHTML = '';
+        const fragment = document.createDocumentFragment();
+        for (const country of countries) {
+            const option = document.createElement('option');
+            option.value = country;
+            option.textContent = country;
+            fragment.appendChild(option);
+        }
+        countrySelect.appendChild(fragment);
+    }
+    const courseSelect = form.querySelector('.course select');
+    if (courseSelect) {
+        courseSelect.innerHTML = '';
+        const fragment = document.createDocumentFragment();
+        for (const course of COURSES) {
+            const option = document.createElement('option');
+            option.value = course;
+            option.textContent = course;
+            fragment.appendChild(option);
+        }
+        courseSelect.appendChild(fragment);
+    }
+
+
+}
+
+export { renderTeachers, renderFilters, renderTable, renderAddTeacherForm };

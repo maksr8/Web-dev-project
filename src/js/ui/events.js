@@ -1,4 +1,4 @@
-import { handlePopupClick } from './popups.js';
+import { handlePopupClick, handleAddTeacherSubmit } from './popups.js';
 import { handleTeacherImageClick, handleFavoritesClick, handleAddTeacherClick } from './teachers.js';
 import { handleFormChange } from './filters.js';
 import { handleSearch } from './searching.js';
@@ -35,14 +35,19 @@ function setupUIEvents() {
         filtersForm.addEventListener('change', handleFormChange);
     }
 
-    const headerUpper = document.querySelector('.header-upper');
-    if (headerUpper) {
-        headerUpper.addEventListener('submit', handleSearch);
+    const searchForm = document.querySelector('.search-form');
+    if (searchForm) {
+        searchForm.addEventListener('submit', handleSearch);
     }
 
     const statisticsTable = document.querySelector('.statistics .table-wrapper');
     if (statisticsTable) {
         statisticsTable.addEventListener('click', handleTableClick);
+    }
+
+    const addTeacherForm = document.querySelector('.add-teacher-popup form');
+    if (addTeacherForm) {
+        addTeacherForm.addEventListener('submit', handleAddTeacherSubmit);
     }
 }
 

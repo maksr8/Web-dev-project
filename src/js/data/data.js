@@ -8,6 +8,10 @@ function getUsers() {
     return users;
 }
 
+function addUser(user) {
+    users.push(user);
+}
+
 function getTeacherById(id) {
     return users.find(u => String(u.id) === String(id));
 }
@@ -22,4 +26,4 @@ function getAllCountries() {
     return Array.from(countries).sort();
 }
 
-export { users, setUsers, getUsers, getTeacherById, getAllCountries };
+export { users, setUsers, getUsers, getTeacherById, getAllCountries, addUser };

@@ -242,5 +242,11 @@
         .button1 {
             margin-top: 2rem;
         }
+
+        .not-valid {
+            text-align: center;
+            font-size: variables.$font-size-large;
+            color: variables.$color-black;
+        }
     }
 }
