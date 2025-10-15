@@ -54,6 +54,11 @@
         max-height: 90vh;
     }
 
+    .popup-content {
+        max-height: 70vh;
+        overflow-y: auto;
+    }
+
     .div-img-and-info {
         width: 100%;
         display: flex;
@@ -97,6 +102,7 @@
             .star-empty {
                 font-size: 2rem;
                 color: variables.$color-star;
+                cursor: pointer;
             }
         }
     }
@@ -128,6 +134,10 @@
         &:hover {
             color: variables.$color-black;
         }
+    }
+
+    .map-wrapper {
+        width: 100%;
     }
 }
 
@@ -231,6 +241,12 @@
 
         .button1 {
             margin-top: 2rem;
+        }
+
+        .not-valid {
+            text-align: center;
+            font-size: variables.$font-size-large;
+            color: variables.$color-black;
         }
     }
 }

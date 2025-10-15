@@ -110,6 +110,7 @@ section {
     // flex-grow: 0;
     display: flex;
     overflow-x: scroll;
+    scroll-behavior: smooth;
     gap: 4rem;
     padding-left: 1rem;
 
