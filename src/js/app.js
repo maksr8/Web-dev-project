@@ -5,6 +5,8 @@ import { isValid } from './logic/validate.js';
 import { filterUsersBy } from './logic/filter.js';
 import { sortUsersBy } from './logic/sort.js';
 import { searchUsers } from './logic/search.js';
+import { setupUIEvents } from './ui/events.js';
+import { setUsers } from './data/data.js';
 
 
 const users = getAllUsers(randomUserMock, additionalUsers);
@@ -51,16 +53,6 @@ const options = {
 }
 console.log(`Filtered users percent: ${getPercentFiltered(validUsers, options)}`)
 
-
-
-
-
-
-
-
-
-
-
 function getPercentFiltered(users, options = {}) {
   const { search, filters } = options;
 
@@ -78,3 +70,15 @@ function getPercentFiltered(users, options = {}) {
   const percent = (filtered.length / users.length) * 100;
   return Math.round(percent);
 }
+
+
+
+
+
+
+
+setUsers(validUsers);
+
+document.addEventListener('DOMContentLoaded', () => {
+  setupUIEvents();
+});
