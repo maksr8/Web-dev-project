@@ -1,20 +1,18 @@
 import { COURSES } from "../data/constants.js";
-import { getUsers } from "../data/data";
+import { getDisplayedUsers, getUsers } from "../data/data";
 import { getAllCountries } from "../data/data.js";
-import { getFilteredUsers } from "./filters.js";
 
-function renderTeachers(isFavorite, users = getUsers()) {
+async function renderTeachers(isFavorite) {
 
     let container = document.querySelector('.teachers');
-    if (!users) {
-        users = getUsers();
-    }
+
+    let users = await getDisplayedUsers();
     if (isFavorite) {
+        users = getUsers();
         users = users.filter(u => u.favorite);
         container = document.querySelector('.favorites');
-    } else {
-        users = getFilteredUsers(users);
     }
+
     container.innerHTML = '';
     if (!container) return;
 
@@ -98,7 +96,10 @@ function renderFilters() {
     }
 }
 
-function renderTable(users = getUsers(), sortState = { key: null, direction: null }) {
+async function renderTable(users = null, sortState = { key: null, direction: null }) {
+    if (!users) {
+        users = await getDisplayedUsers();
+    }
     const wrapper = document.querySelector('.table-wrapper');
     if (!wrapper) return;
 

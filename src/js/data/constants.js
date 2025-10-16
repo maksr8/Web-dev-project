@@ -1,4 +1,4 @@
-export const COURSES = [
+const COURSES = [
     'Mathematics',
     'Physics',
     'English',
@@ -12,9 +12,9 @@ export const COURSES = [
     'Medicine',
     'Statistics'
 ];
-export const NOTE_FOR_MOCK = 'Note1...';
-export const NOTE_FOR_ADDITIONAL = 'Note2...';
-export const STRING_KEYS_TO_VALID = [
+const NOTE_FOR_MOCK = 'Note1...';
+const NOTE_FOR_ADDITIONAL = 'Note2...';
+const STRING_KEYS_TO_VALID = [
     'full_name',
     'gender',
     'note',
@@ -22,7 +22,7 @@ export const STRING_KEYS_TO_VALID = [
     'city',
     'country'
 ];
-export const COUNTRY_CODES = {
+const COUNTRY_CODES = {
     Germany: 'DE',
     Ireland: 'IE',
     Australia: 'AU',
@@ -38,4 +38,18 @@ export const COUNTRY_CODES = {
     Canada: 'CA',
     France: 'FR',
     Netherlands: 'NL',
+};
+const API_URL_USERS = "http://localhost:3000/users";
+const API_URL_DISPLAYED_USERS = "http://localhost:3000/displayedUsers";
+const PAGE_LIMIT = 10;
+
+export {
+    COURSES,
+    NOTE_FOR_MOCK,
+    NOTE_FOR_ADDITIONAL,
+    STRING_KEYS_TO_VALID,
+    COUNTRY_CODES,
+    API_URL_USERS,
+    API_URL_DISPLAYED_USERS,
+    PAGE_LIMIT
 };

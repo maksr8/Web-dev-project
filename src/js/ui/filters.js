@@ -1,10 +1,10 @@
-import { filterUsersBy } from '../logic/filter.js';
-import { renderTeachers } from './render.js';
+import { setFilters } from '../data/data.js';
+import { updatePaginationButtons } from './pagination.js';
+import { renderTable, renderTeachers } from './render.js';
 
-function getFilteredUsers(users) {
-
+async function handleFiltersFormChange() {
     const filtersForm = document.querySelector('.filters');
-    if (!filtersForm) return users;
+    if (!filtersForm) return;
 
     const ageFilter = filtersForm.querySelector('.filter-age select').value;
     const countryFilter = filtersForm.querySelector('.filter-country select').value;
@@ -34,11 +34,10 @@ function getFilteredUsers(users) {
         filters.favorite = [true];
     }
 
-    return filterUsersBy(users, filters);
+    await setFilters(filters);
+    await renderTeachers(false);
+    await renderTable();
+    updatePaginationButtons();
 }
 
-function handleFormChange() {
-    renderTeachers(false);
-}
-
-export { getFilteredUsers, handleFormChange };
+export { handleFiltersFormChange };

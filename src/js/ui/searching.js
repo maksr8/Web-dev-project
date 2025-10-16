@@ -1,15 +1,16 @@
-import { getUsers } from "../data/data";
-import { searchUsersByNameNoteAge } from "../logic/search";
-import { renderTeachers } from "./render";
+import { setSearchQuery } from "../data/data";
+import { updatePaginationButtons } from "./pagination";
+import { renderTable, renderTeachers } from "./render";
 
-function handleSearch(event) {
+async function handleSearch(event) {
     event.preventDefault();
     const searchInput = event.target.querySelector('input[type="text"]');
     if (searchInput) {
         const query = searchInput.value.trim().toLowerCase();
-        let users = getUsers();
-        users = searchUsersByNameNoteAge(users, query);
-        renderTeachers(false, users);
+        await setSearchQuery(query);
+        await renderTeachers(false);
+        await renderTable();
+        updatePaginationButtons();
     }
 }
 
