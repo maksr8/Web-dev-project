@@ -1,4 +1,4 @@
-import { getTeacherById, addUser, getUsers } from '../data/data.js';
+import { getTeacherById, addUser, updateDisplayed } from '../data/data.js';
 import { renderTable, renderTeachers } from './render.js';
 import { isValid } from '../logic/validate.js';
 import { STRING_KEYS_TO_VALID } from '../data/constants.js';
@@ -75,7 +75,7 @@ function openPopupWithTeacher(teacher) {
     popup.classList.remove('hidden');
 }
 
-function handlePopupClick(e) {
+async function handlePopupClick(e) {
     const closeBtn = e.target.closest('.close');
     if (closeBtn) {
         const popup = closeBtn.closest('.popup');
@@ -104,6 +104,7 @@ function handlePopupClick(e) {
             const teacher = getTeacherById(id);
             if (teacher) {
                 teacher.favorite = !teacher.favorite;
+                await updateDisplayed();
                 renderTeachers(false);
                 renderTeachers(true);
             }
@@ -112,7 +113,7 @@ function handlePopupClick(e) {
     }
 }
 
-function handleAddTeacherSubmit(e) {
+async function handleAddTeacherSubmit(e) {
     e.preventDefault();
     const form = e.target.closest('form');
     if (!form) return;
@@ -156,7 +157,7 @@ function handleAddTeacherSubmit(e) {
     }
 
     let newTeacher = {
-        id: Date.now(),
+        id: typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
         full_name: full_name,
         course: course,
         country: country,
@@ -177,7 +178,7 @@ function handleAddTeacherSubmit(e) {
         return;
     }
 
-    addUser(newTeacher);
+    await addUser(newTeacher);
 
     renderTeachers(false);
     renderTable();

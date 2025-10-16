@@ -1,6 +1,6 @@
 import { sortUsersBy } from '../logic/sort.js';
 import { renderTable } from '../ui/render.js';
-import { getUsers } from '../data/data.js';
+import { getDisplayedUsers } from '../data/data.js';
 
 let currentSort = { key: null, direction: 'asc' };
 
@@ -24,7 +24,7 @@ function handleTableClick(event) {
 
     currentSort = { key, direction: newDirection };
 
-    const users = getUsers();
+    const users = getDisplayedUsers();
     const sortedUsers = sortUsersBy(users, key, newDirection);
 
     renderTable(sortedUsers, currentSort);

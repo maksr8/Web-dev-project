@@ -8,6 +8,7 @@ import { searchUsers } from './logic/search.js';
 import { setupUIEvents } from './ui/events.js';
 import { setUsers } from './data/data.js';
 import { renderTeachers, renderFilters, renderTable, renderAddTeacherForm } from './ui/render.js';
+import { fetchUsers } from './api/fetchUsers.js';
 
 
 const users = getAllUsers(randomUserMock, additionalUsers);
@@ -78,14 +79,19 @@ function getPercentFiltered(users, options = {}) {
 
 
 
-validUsers.find(u => u.id === 5).picture_large = null;
-setUsers(validUsers);
+// validUsers.find(u => u.id === 5).picture_large = null;
+// setUsers(validUsers);
 
-document.addEventListener('DOMContentLoaded', () => {
+async function startApp() {
+  await fetchUsers(50);
   renderTeachers(false);
   renderTeachers(true);
   renderFilters();
   renderTable();
   renderAddTeacherForm();
   setupUIEvents();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  startApp();
 });
