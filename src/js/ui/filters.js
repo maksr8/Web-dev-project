@@ -1,4 +1,5 @@
 import { setFilters } from '../data/data.js';
+import { updatePaginationButtons } from './pagination.js';
 import { renderTable, renderTeachers } from './render.js';
 
 async function handleFiltersFormChange() {
@@ -34,8 +35,9 @@ async function handleFiltersFormChange() {
     }
 
     await setFilters(filters);
-    renderTeachers(false);
-    renderTable();
+    await renderTeachers(false);
+    await renderTable();
+    updatePaginationButtons();
 }
 
 export { handleFiltersFormChange };

@@ -84,10 +84,10 @@ function getPercentFiltered(users, options = {}) {
 
 async function startApp() {
   await fetchUsers(50);
-  renderTeachers(false);
-  renderTeachers(true);
+  await renderTeachers(false);
+  await renderTeachers(true);
   renderFilters();
-  renderTable();
+  await renderTable();
   renderAddTeacherForm();
   setupUIEvents();
 }

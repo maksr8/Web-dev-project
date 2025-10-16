@@ -1,7 +1,8 @@
 import { filterUsersBy } from "../logic/filter";
 import { searchUsersByNameNoteAge } from "../logic/search";
 import { sortUsersBy } from "../logic/sort";
-import { API_URL_USERS, API_URL_DISPLAYED_USERS } from "./constants.js";
+import { updatePaginationButtons } from "../ui/pagination.js";
+import { API_URL_USERS, API_URL_DISPLAYED_USERS, PAGE_LIMIT } from "./constants.js";
 
 let users = [];
 let displayedUsers = [];
@@ -9,7 +10,8 @@ let displayedUsers = [];
 let state = {
     searchQuery: '',
     filters: {},
-    sort: { key: null, direction: null }
+    // sort: { key: null, direction: null },
+    page: 1
 };
 
 async function setUsers(newUsers) {
@@ -73,12 +75,32 @@ function getUsers() {
     return users;
 }
 
-function getDisplayedUsers() {
-    return displayedUsers;
+async function getDisplayedUsers() {
+    const url = `${API_URL_DISPLAYED_USERS}?_page=${state.page}&_per_page=${PAGE_LIMIT}`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('Failed to fetch displayed users');
+    const response = await res.json();
+    return response.data || [];
 }
 
 function getState() {
     return state;
+}
+
+function addPage() {
+    state.page += 1;
+}
+
+function subtractPage() {
+    state.page -= 1;
+}
+
+function prevPageAvailable() {
+    return state.page > 1;
+}
+
+function nextPageAvailable() {
+    return state.page < Math.ceil(displayedUsers.length / PAGE_LIMIT);
 }
 
 async function addUser(user) {
@@ -125,11 +147,13 @@ async function updateDisplayed() {
     if (state.filters) {
         result = filterUsersBy(result, state.filters);
     }
-    result = sortUsersBy(result, state.sort.key, state.sort.direction);
+    // result = sortUsersBy(result, state.sort.key, state.sort.direction);
 
     await deleteDisplayedUsersServer();
     displayedUsers = result;
     await postDisplayedUsersServer(displayedUsers);
+    state.page = 1;
+    updatePaginationButtons();
 }
 
 export {
@@ -143,5 +167,9 @@ export {
     setFilters,
     setSort,
     getState,
-    updateDisplayed
+    updateDisplayed,
+    addPage,
+    subtractPage,
+    prevPageAvailable,
+    nextPageAvailable
 };

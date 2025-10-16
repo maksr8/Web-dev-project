@@ -1,4 +1,5 @@
 import { setSearchQuery } from "../data/data";
+import { updatePaginationButtons } from "./pagination";
 import { renderTable, renderTeachers } from "./render";
 
 async function handleSearch(event) {
@@ -7,8 +8,9 @@ async function handleSearch(event) {
     if (searchInput) {
         const query = searchInput.value.trim().toLowerCase();
         await setSearchQuery(query);
-        renderTeachers(false);
-        renderTable();
+        await renderTeachers(false);
+        await renderTable();
+        updatePaginationButtons();
     }
 }
 

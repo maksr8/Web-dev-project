@@ -3,6 +3,7 @@ import { handleTeacherImageClick, handleFavoritesClick, handleAddTeacherClick } 
 import { handleFiltersFormChange } from './filters.js';
 import { handleSearch } from './searching.js';
 import { handleTableClick } from './statistics.js';
+import { handleTeachersPaginationClick } from './pagination.js';
 
 function setupUIEvents() {
     const teachersContainer = document.querySelector('.teachers');
@@ -33,6 +34,11 @@ function setupUIEvents() {
     const filtersForm = document.querySelector('.filters');
     if (filtersForm) {
         filtersForm.addEventListener('change', handleFiltersFormChange);
+    }
+
+    const teachersPagination = document.querySelector('.teachers-pagination');
+    if (teachersPagination) {
+        teachersPagination.addEventListener('click', handleTeachersPaginationClick);
     }
 
     const searchForm = document.querySelector('.search-form');

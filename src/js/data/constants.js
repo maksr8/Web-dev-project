@@ -41,6 +41,7 @@ const COUNTRY_CODES = {
 };
 const API_URL_USERS = "http://localhost:3000/users";
 const API_URL_DISPLAYED_USERS = "http://localhost:3000/displayedUsers";
+const PAGE_LIMIT = 10;
 
 export {
     COURSES,
@@ -49,5 +50,6 @@ export {
     STRING_KEYS_TO_VALID,
     COUNTRY_CODES,
     API_URL_USERS,
-    API_URL_DISPLAYED_USERS
+    API_URL_DISPLAYED_USERS,
+    PAGE_LIMIT
 };

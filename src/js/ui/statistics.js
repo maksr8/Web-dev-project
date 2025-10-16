@@ -4,7 +4,7 @@ import { getDisplayedUsers } from '../data/data.js';
 
 let currentSort = { key: null, direction: 'asc' };
 
-function handleTableClick(event) {
+async function handleTableClick(event) {
     const headerCell = event.target.closest('.sortable');
     if (!headerCell) return;
 
@@ -24,10 +24,10 @@ function handleTableClick(event) {
 
     currentSort = { key, direction: newDirection };
 
-    const users = getDisplayedUsers();
+    const users = await getDisplayedUsers();
     const sortedUsers = sortUsersBy(users, key, newDirection);
 
-    renderTable(sortedUsers, currentSort);
+    await renderTable(sortedUsers, currentSort);
 }
 
 export { handleTableClick };

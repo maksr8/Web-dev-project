@@ -31,7 +31,7 @@ function handleFavoritesClick(e) {
         const favoritesContainer = document.querySelector('.favorites');
         if (favoritesContainer) {
             favoritesContainer.scrollBy({
-                left: -200,
+                left: -300,
                 behavior: 'smooth'
             });
         }
@@ -42,7 +42,7 @@ function handleFavoritesClick(e) {
         const favoritesContainer = document.querySelector('.favorites');
         if (favoritesContainer) {
             favoritesContainer.scrollBy({
-                left: 70,
+                left: 300,
                 behavior: 'smooth'
             });
         }

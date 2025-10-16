@@ -3,6 +3,7 @@ import { renderTable, renderTeachers } from './render.js';
 import { isValid } from '../logic/validate.js';
 import { STRING_KEYS_TO_VALID } from '../data/constants.js';
 import { calcAgeByBirthDate } from '../data/users.js';
+import { updatePaginationButtons } from './pagination.js';
 
 function openPopup(popup) {
     popup.classList.remove('hidden');
@@ -105,8 +106,8 @@ async function handlePopupClick(e) {
             if (teacher) {
                 teacher.favorite = !teacher.favorite;
                 await updateDisplayed();
-                renderTeachers(false);
-                renderTeachers(true);
+                await renderTeachers(false);
+                await renderTeachers(true);
             }
 
         }
@@ -180,8 +181,9 @@ async function handleAddTeacherSubmit(e) {
 
     await addUser(newTeacher);
 
-    renderTeachers(false);
-    renderTable();
+    await renderTeachers(false);
+    await renderTable();
+    updatePaginationButtons();
     const popup = form.closest('.popup');
     closePopup(popup);
     form.reset();
