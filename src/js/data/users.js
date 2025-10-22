@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
 import { randIsFavorite, randCourse, randHexColor } from '../logic/utils.js';
 import {
@@ -6,11 +7,7 @@ import {
 } from './constants.js';
 
 function getAllUsers(randomUserMock, additionalUsers) {
-    let allUsers = [];
-    let id = 0;
-    for (const user of randomUserMock) {
-        allUsers.push(normalize(user, id++));
-    }
+    let allUsers = _.map(randomUserMock, (user, id) => normalize(user, id));
     for (const user of additionalUsers) {
         addUser(allUsers, user);
     }
@@ -23,11 +20,11 @@ function addUser(allUsers, user) {
         u => u.id === userClone.id || u.full_name === userClone.full_name
     );
     if (existingIndex !== -1) {
-        for (let key in userClone) {
-            if (userClone[key] !== null && userClone[key] !== undefined) {
-                allUsers[existingIndex][key] = userClone[key];
+        _.forEach(userClone, (value, key) => {
+            if (value !== null && value !== undefined) {
+                allUsers[existingIndex][key] = value;
             }
-        }
+        });
     } else {
         userClone = fillKeysWithData(userClone);
         allUsers.push(userClone);
@@ -36,18 +33,18 @@ function addUser(allUsers, user) {
 }
 
 function renameB_dayToB_date(user) {
-    const clone = structuredClone(user);
-    if ('b_day' in clone) {
+    const clone = _.cloneDeep(user);
+    if (_.has(clone, 'b_day')) {
         clone.b_date = clone.b_day;
-        delete clone.b_day;
+        return _.omit(clone, 'b_day');
     }
     return clone;
 }
 
 function fillKeysWithData(user) {
-    const userClone = structuredClone(user);
-    for (let key in userClone) {
-        if (userClone[key] === null || userClone[key] === undefined) {
+    const userClone = _.cloneDeep(user);
+    _.forEach(userClone, (value, key) => {
+        if (value === null || value === undefined) {
             switch (key) {
                 case 'course':
                     userClone[key] = randCourse(COURSES);
@@ -65,27 +62,27 @@ function fillKeysWithData(user) {
                     userClone[key] = '';
             }
         }
-    }
+    });
     return userClone;
 }
 
 function normalize(user, id) {
     let normalizedUser = {
-        gender: user.gender,
-        title: user.name.title,
-        full_name: `${user.name.first} ${user.name.last}`,
-        city: user.location.city,
-        state: user.location.state,
-        country: user.location.country,
-        postcode: user.location.postcode,
-        coordinates: structuredClone(user.location.coordinates),
-        timezone: structuredClone(user.location.timezone),
-        email: user.email,
-        b_date: user.dob.date,
-        age: user.dob.age,
-        phone: user.phone,
-        picture_large: user.picture.large,
-        picture_thumbnail: user.picture.thumbnail,
+        gender: _.get(user, 'gender'),
+        title: _.get(user, 'name.title'),
+        full_name: `${_.get(user, 'name.first', '')} ${_.get(user, 'name.last', '')}`,
+        city: _.get(user, 'location.city'),
+        state: _.get(user, 'location.state'),
+        country: _.get(user, 'location.country'),
+        postcode: _.get(user, 'location.postcode'),
+        coordinates: _.cloneDeep(_.get(user, 'location.coordinates')),
+        timezone: _.cloneDeep(_.get(user, 'location.timezone')),
+        email: _.get(user, 'email'),
+        b_date: _.get(user, 'dob.date'),
+        age: _.get(user, 'dob.age'),
+        phone: _.get(user, 'phone'),
+        picture_large: _.get(user, 'picture.large'),
+        picture_thumbnail: _.get(user, 'picture.thumbnail'),
         id: id,
         favorite: randIsFavorite(20),
         course: randCourse(COURSES),
@@ -96,15 +93,16 @@ function normalize(user, id) {
 }
 
 function repairInvalidGenderAndPhone(users) {
-    return users.map(user => {
-        const userClone = structuredClone(user);
+    return _.map(users, user => {
+        const userClone = _.cloneDeep(user);
         return repairPhone(repairGender(userClone), COUNTRY_CODES);
     });
 }
 
 function repairGender(user) {
-    if (typeof user.gender === 'string' && user.gender.length > 0) {
-        user.gender = user.gender.charAt(0).toUpperCase() + user.gender.slice(1);
+    const gender = _.get(user, 'gender');
+    if (_.isString(gender) && gender.length > 0) {
+        user.gender = _.capitalize(gender);
     }
     return user;
 }
