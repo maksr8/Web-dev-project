@@ -92,6 +92,10 @@ async function startApp() {
   setupUIEvents();
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  startApp();
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    await startApp();
+  } catch (err) {
+    console.error('Failed to start app', err);
+  }
 });

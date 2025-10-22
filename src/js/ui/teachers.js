@@ -13,7 +13,6 @@ function handleTeacherImageClick(e) {
 
     const id = card.dataset.id;
     const teacher = getTeacherById(id);
-
     if (teacher) {
         openPopupWithTeacher(teacher);
     }

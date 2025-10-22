@@ -4,6 +4,19 @@ import { isValid } from '../logic/validate.js';
 import { STRING_KEYS_TO_VALID } from '../data/constants.js';
 import { calcAgeByBirthDate } from '../data/users.js';
 import { updatePaginationButtons } from './pagination.js';
+import L from "leaflet";
+import 'leaflet/dist/leaflet.css';
+import iconUrl from "leaflet/dist/images/marker-icon.png";
+import iconRetinaUrl from "leaflet/dist/images/marker-icon-2x.png";
+import shadowUrl from "leaflet/dist/images/marker-shadow.png";
+
+delete L.Icon.Default.prototype._getIconUrl;
+
+L.Icon.Default.mergeOptions({
+    iconRetinaUrl,
+    iconUrl,
+    shadowUrl,
+});
 
 function openPopup(popup) {
     popup.classList.remove('hidden');
@@ -18,6 +31,8 @@ function openPopupWithTeacher(teacher) {
     if (!popup) return;
 
     popup.dataset.id = teacher.id || 0;
+    popup.dataset.lat = teacher.latitude;
+    popup.dataset.lon = teacher.longitude;
 
     const img = popup.querySelector('img');
     if (img) {
@@ -71,7 +86,11 @@ function openPopupWithTeacher(teacher) {
         noteEl.textContent = teacher.note || '';
     }
 
-    //since no free google maps api, map is not added
+    const mapWrapper = popup.querySelector('.map-wrapper');
+    if (mapWrapper) {
+        mapWrapper.innerHTML = '';
+        mapWrapper.classList.add('hidden');
+    }
 
     popup.classList.remove('hidden');
 }
@@ -86,10 +105,40 @@ async function handlePopupClick(e) {
     const toggleMapLink = e.target.closest('.toggle-map');
     if (toggleMapLink) {
         e.preventDefault();
+
         const popup = toggleMapLink.closest('.popup');
         const mapWrapper = popup.querySelector('.map-wrapper');
-        if (mapWrapper) {
-            mapWrapper.classList.toggle('hidden');
+        if (!mapWrapper) return;
+
+        const lat = parseFloat(popup.dataset.lat);
+        const lon = parseFloat(popup.dataset.lon);
+
+        const isHidden = mapWrapper.classList.toggle('hidden');
+
+        if (!isHidden) {
+            mapWrapper.innerHTML = '';
+
+            const mapContainer = document.createElement('div');
+            mapContainer.className = 'teacher-map';
+            mapWrapper.appendChild(mapContainer);
+
+            if (!isNaN(lat) && !isNaN(lon)) {
+                const map = L.map(mapContainer, {
+                    zoomControl: true,
+                    scrollWheelZoom: false
+                }).setView([lat, lon], 6);
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+                    maxZoom: 18,
+                }).addTo(map);
+
+                L.marker([lat, lon]).addTo(map);
+
+                setTimeout(() => map.invalidateSize(), 200);
+            } else {
+                mapWrapper.innerHTML = `<p style="text-align:center;">No coordinates available</p>`;
+            }
         }
     }
 

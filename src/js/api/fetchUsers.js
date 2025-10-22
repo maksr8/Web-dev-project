@@ -10,7 +10,7 @@ async function fetchUsers(count = 50) {
         const data = await response.json();
         const users = data.results.map(mapRandomUserToTeacher);
 
-        setUsers(users);
+        await setUsers(users);
     } catch (error) {
         console.error('Failed to fetch users:', error);
     }
@@ -31,6 +31,8 @@ function mapRandomUserToTeacher(u) {
     const course = randCourse(COURSES);
     const favorite = randIsFavorite();
     const id = u.login.uuid;
+    const latitude = u.location.coordinates.latitude;
+    const longitude = u.location.coordinates.longitude;
 
     return {
         id,
@@ -42,6 +44,8 @@ function mapRandomUserToTeacher(u) {
         phone,
         country,
         city,
+        latitude,
+        longitude,
         picture_large,
         note,
         color,
