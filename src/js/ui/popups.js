@@ -1,5 +1,5 @@
 import { getTeacherById, addUser, updateDisplayed } from '../data/data.js';
-import { renderTable, renderTeachers } from './render.js';
+import { renderPieChart, renderTable, renderTeachers } from './render.js';
 import { isValid } from '../logic/validate.js';
 import { STRING_KEYS_TO_VALID } from '../data/constants.js';
 import { calcAgeByBirthDate } from '../data/users.js';
@@ -233,6 +233,7 @@ async function handleAddTeacherSubmit(e) {
     await renderTeachers(false);
     await renderTable();
     updatePaginationButtons();
+    await renderPieChart();
     const popup = form.closest('.popup');
     closePopup(popup);
     form.reset();

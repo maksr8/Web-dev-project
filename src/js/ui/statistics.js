@@ -1,5 +1,5 @@
 import { sortUsersBy } from '../logic/sort.js';
-import { renderTable } from '../ui/render.js';
+import { renderPieChart, renderTable } from '../ui/render.js';
 import { getDisplayedUsers } from '../data/data.js';
 
 let currentSort = { key: null, direction: 'asc' };
@@ -30,4 +30,28 @@ async function handleTableClick(event) {
     await renderTable(sortedUsers, currentSort);
 }
 
-export { handleTableClick };
+async function handleStatisticsToggle(event) {
+    const button = event.target.closest('.button1');
+    if (!button) return;
+
+    const isTableButton = button.textContent.trim() === 'Table';
+    const chartWrapper = document.querySelector('.chart-wrapper');
+    const tableWrapper = document.querySelector('.table-wrapper');
+
+    if (isTableButton) {
+        chartWrapper.classList.add('hidden');
+        tableWrapper.classList.remove('hidden');
+        button.disabled = true;
+        const otherButton = button.nextElementSibling;
+        if (otherButton) otherButton.disabled = false;
+    } else {
+        chartWrapper.classList.remove('hidden');
+        tableWrapper.classList.add('hidden');
+        button.disabled = true;
+        const otherButton = button.previousElementSibling;
+        if (otherButton) otherButton.disabled = false;
+        await renderPieChart();
+    }
+}
+
+export { handleTableClick, handleStatisticsToggle };

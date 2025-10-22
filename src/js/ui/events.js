@@ -2,7 +2,7 @@ import { handlePopupClick, handleAddTeacherSubmit } from './popups.js';
 import { handleTeacherImageClick, handleFavoritesClick, handleAddTeacherClick } from './teachers.js';
 import { handleFiltersFormChange } from './filters.js';
 import { handleSearch } from './searching.js';
-import { handleTableClick } from './statistics.js';
+import { handleStatisticsToggle, handleTableClick } from './statistics.js';
 import { handleTeachersPaginationClick } from './pagination.js';
 
 function setupUIEvents() {
@@ -49,6 +49,11 @@ function setupUIEvents() {
     const statisticsTable = document.querySelector('.statistics .table-wrapper');
     if (statisticsTable) {
         statisticsTable.addEventListener('click', handleTableClick);
+    }
+
+    const statisticsToggle = document.querySelector('.statistics .statistics-toggle');
+    if (statisticsToggle) {
+        statisticsToggle.addEventListener('click', handleStatisticsToggle);
     }
 
     const addTeacherForm = document.querySelector('.add-teacher-popup form');

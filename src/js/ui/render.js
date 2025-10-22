@@ -2,6 +2,8 @@ import { COURSES } from "../data/constants.js";
 import { getDisplayedUsers, getUsers } from "../data/data";
 import { getAllCountries } from "../data/data.js";
 
+let statisticsChart;
+
 async function renderTeachers(isFavorite) {
 
     let container = document.querySelector('.teachers');
@@ -180,6 +182,64 @@ async function renderTable(users = null, sortState = { key: null, direction: nul
     wrapper.appendChild(table);
 }
 
+async function renderPieChart() {
+    const users = await getUsers();
+
+    const courseCounts = users.reduce((acc, user) => {
+        const course = user.course || 'Unknown';
+        acc[course] = (acc[course] || 0) + 1;
+        return acc;
+    }, {});
+
+    const ctx = document.querySelector('.statistics-chart');
+    if (!ctx) return;
+
+    if (statisticsChart) {
+        statisticsChart.destroy();
+    }
+
+    statisticsChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: Object.keys(courseCounts),
+            datasets: [{
+                label: 'Users per course',
+                data: Object.values(courseCounts),
+                backgroundColor: [
+                    '#36A2EB', '#FF6384', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40',
+                    '#E7E9ED', '#8D6E63', '#FF8A65', '#4DB6AC', '#BA68C8', '#A1887F'
+                ]
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function (context) {
+                            let label = context.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed !== null) {
+                                const total = context.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                                const value = context.parsed;
+                                const percentage = ((value / total) * 100).toFixed(1) + '%';
+                                label += `${value} (${percentage})`;
+                            }
+                            return label;
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
 function renderAddTeacherForm() {
     const form = document.querySelector('.add-teacher-popup form');
     if (!form) return;
@@ -213,4 +273,4 @@ function renderAddTeacherForm() {
 
 }
 
-export { renderTeachers, renderFilters, renderTable, renderAddTeacherForm };
+export { renderTeachers, renderFilters, renderTable, renderAddTeacherForm, renderPieChart };

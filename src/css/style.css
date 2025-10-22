@@ -311,6 +311,25 @@ section {
   align-items: center;
   gap: 2rem;
 }
+.statistics .statistics-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+}
+.statistics .statistics-toggle .button1[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.statistics .chart-wrapper {
+  width: 100%;
+  max-width: 800px;
+}
+.statistics .chart-wrapper canvas {
+  width: 100%;
+}
 
 .table-wrapper {
   width: 100%;

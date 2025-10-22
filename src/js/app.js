@@ -7,7 +7,7 @@ import { sortUsersBy } from './logic/sort.js';
 import { searchUsers } from './logic/search.js';
 import { setupUIEvents } from './ui/events.js';
 import { setUsers } from './data/data.js';
-import { renderTeachers, renderFilters, renderTable, renderAddTeacherForm } from './ui/render.js';
+import { renderTeachers, renderFilters, renderTable, renderAddTeacherForm, renderPieChart } from './ui/render.js';
 import { fetchUsers } from './api/fetchUsers.js';
 
 
@@ -88,14 +88,9 @@ async function startApp() {
   await renderTeachers(true);
   renderFilters();
   await renderTable();
+  await renderPieChart();
   renderAddTeacherForm();
   setupUIEvents();
 }
 
-document.addEventListener('DOMContentLoaded', async () => {
-  try {
-    await startApp();
-  } catch (err) {
-    console.error('Failed to start app', err);
-  }
-});
+window.addEventListener('load', startApp);
