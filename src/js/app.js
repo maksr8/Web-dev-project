@@ -22,7 +22,7 @@ console.log(repairedUsers);
 // }));
 
 for (const user of repairedUsers) {
-  const valid = isValid(user, STRING_KEYS_TO_VALID);
+  // const valid = isValid(user, STRING_KEYS_TO_VALID);
   // console.log(`${user.id} ${valid}`);
 }
 const validUsers = repairedUsers.filter(u => isValid(u, STRING_KEYS_TO_VALID));
