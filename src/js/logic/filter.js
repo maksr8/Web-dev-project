@@ -1,42 +1,42 @@
+import _ from 'lodash';
+
 function filterUsersBy(users, filters) {
-    return users.filter(u => {
-        if (filters.country && !filters.country.includes(u.country)) {
-            return false;
+    const checks = [];
+
+    if (_.has(filters, 'country')) {
+        checks.push(user => _.includes(filters.country, user.country));
+    }
+
+    if (_.has(filters, 'gender')) {
+        checks.push(user => _.includes(filters.gender, user.gender));
+    }
+
+    if (_.has(filters, 'favorite')) {
+        checks.push(user => _.includes(filters.favorite, user.favorite));
+    }
+
+    if (_.has(filters, 'with_picture')) {
+        checks.push(user => _.includes(filters.with_picture, !!user.picture_large));
+    }
+
+    if (_.has(filters, 'age')) {
+        const [first, second] = filters.age;
+
+        if (_.isNumber(first) && _.isUndefined(second)) {
+            checks.push(user => user.age === first);
         }
-
-        if (filters.age) {
-            const [first, second] = filters.age;
-
-            if (typeof first === 'number' && second === undefined) {
-                if (u.age !== first) {
-                    return false;
-                }
-            } else if (typeof first === 'string' && typeof second === 'number') {
-                const opMatch = first.trim().match(/^(>=|<=|>|<|=)$/);
-                if (opMatch && !compareNumber(u.age, opMatch[0], second)) {
-                    return false;
-                }
-            } else if (typeof first === 'number' && typeof second === 'number') {
-                if (u.age < first || u.age > second) {
-                    return false;
-                }
+        else if (_.isString(first) && _.isNumber(second)) {
+            const opMatch = first.trim().match(/^(>=|<=|>|<|=)$/);
+            if (opMatch) {
+                checks.push(user => compareNumber(user.age, opMatch[0], second));
             }
         }
-
-        if (filters.gender && !filters.gender.includes(u.gender)) {
-            return false;
+        else if (_.isNumber(first) && _.isNumber(second)) {
+            checks.push(user => _.inRange(user.age, first, second + 1));
         }
+    }
 
-        if (filters.favorite && !filters.favorite.includes(u.favorite)) {
-            return false;
-        }
-
-        if (filters.with_picture && !filters.with_picture.includes(!!u.picture_large)) {
-            return false;
-        }
-
-        return true;
-    });
+    return _.filter(users, user => _.every(checks, check => check(user)));
 }
 
 function compareNumber(value, op, num) {
