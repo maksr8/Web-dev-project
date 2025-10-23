@@ -1,5 +1,5 @@
 import { sortUsersBy } from '../logic/sort.js';
-import { renderTable } from '../ui/render.js';
+import { renderPieChart, renderPivotTable, renderTable } from '../ui/render.js';
 import { getDisplayedUsers } from '../data/data.js';
 
 let currentSort = { key: null, direction: 'asc' };
@@ -30,4 +30,36 @@ async function handleTableClick(event) {
     await renderTable(sortedUsers, currentSort);
 }
 
-export { handleTableClick };
+async function handleStatisticsToggle(event) {
+    const button = event.target.closest('.button1');
+    if (!button) return;
+
+    const toggleContainer = button.closest('.statistics-toggle');
+    const allButtons = toggleContainer.querySelectorAll('.button1');
+
+    const statisticsSection = button.closest('.statistics');
+    const chartWrapper = statisticsSection.querySelector('.chart-wrapper');
+    const tableWrapper = statisticsSection.querySelector('.table-wrapper');
+    const pivotWrapper = statisticsSection.querySelector('#pivot-container');
+
+    [chartWrapper, tableWrapper, pivotWrapper].forEach(el => el.classList.add('hidden'));
+    allButtons.forEach(btn => btn.disabled = false);
+
+    const view = button.textContent.trim();
+    if (view === 'Chart') {
+        chartWrapper.classList.remove('hidden');
+        await renderPieChart();
+    } else if (view === 'Table') {
+        tableWrapper.classList.remove('hidden');
+    } else if (view === 'Report') {
+        pivotWrapper.classList.remove('hidden');
+        await renderPivotTable(false);
+    } else if (view === 'Flat') {
+        pivotWrapper.classList.remove('hidden');
+        await renderPivotTable(true);
+    }
+
+    button.disabled = true;
+}
+
+export { handleTableClick, handleStatisticsToggle };

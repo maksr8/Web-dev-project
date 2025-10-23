@@ -1,3 +1,8 @@
+import dayjs from 'dayjs';
+import isToday from 'dayjs/plugin/isToday';
+
+dayjs.extend(isToday);
+
 function randIsFavorite(probability = 20) {
     if (typeof probability !== 'number' || probability < 0 || probability > 100) {
         throw new Error('Invalid probability');
@@ -23,4 +28,23 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-export { randIsFavorite, randCourse, randHexColor, capitalizeFirstLetter };
+function getDaysToBirthday(b_date) {
+    if (!b_date) return null;
+
+    const today = dayjs().startOf('day');
+    const birthDate = dayjs(b_date);
+
+    let nextBirthday = birthDate.year(today.year());
+
+    if (nextBirthday.isToday()) {
+        return 0;
+    }
+
+    if (nextBirthday.isBefore(today)) {
+        nextBirthday = nextBirthday.add(1, 'year');
+    }
+
+    return nextBirthday.diff(today, 'day');
+}
+
+export { randIsFavorite, randCourse, randHexColor, capitalizeFirstLetter, getDaysToBirthday };

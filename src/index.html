@@ -9,6 +9,15 @@
    <title>Teachinder</title>
    <link rel="icon" href="/favicon.ico" type="image/x-icon">
    <link rel="stylesheet" href="./css/style.css">
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.umd.js"
+      integrity="sha512-D4pL3vNgjkHR/qq+nZywuS6Hg1gwR+UzrdBW6Yg8l26revKyQHMgPq9CLJ2+HHalepS+NuGw1ayCCsGXu9JCXA=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+      </script>
+
+   <link href="https://cdn.webdatarocks.com/latest/webdatarocks.min.css" rel="stylesheet" />
+   <script src="https://cdn.webdatarocks.com/latest/webdatarocks.toolbar.min.js"></script>
+   <script src="https://cdn.webdatarocks.com/latest/webdatarocks.js"></script>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -192,6 +201,15 @@
          <hr class="divider">
          <section class="statistics">
             <h2>Statistics</h2>
+            <nav class="statistics-toggle">
+               <button class="button1 no-select " disabled>Table</button>
+               <button class="button1 no-select">Chart</button>
+               <button class="button1 no-select">Report</button>
+               <button class="button1 no-select">Flat</button>
+            </nav>
+            <div class="chart-wrapper hidden">
+               <canvas class="statistics-chart"></canvas>
+            </div>
             <div class="table-wrapper">
                <table>
                   <thead>
@@ -277,6 +295,7 @@
                   </tbody>
                </table>
             </div>
+            <div id="pivot-container" class="hidden"></div>
             <nav class="pagination hidden">
                <a href="#">1</a>
                <a href="#">2</a>
@@ -460,11 +479,12 @@
                      <div class="star star-filled no-select hidden">&#9733;</div>
                      <div class="star star-empty no-select">&#9734;</div>
                   </div>
-                  <p class="subject">Chemistry</p>
-                  <p>Kyiv, Ukraine</p>
-                  <p>35, Male</p>
+                  <p class="info-popup-subject">Chemistry</p>
+                  <p class="info-popup-location">Kyiv, Ukraine</p>
+                  <p class="info-popup-age-gender">35, Male</p>
+                  <p class="birthday-countdown">x days until birthday</p>
                   <a href="mailto:ihor_tkachuk@domain.com">ihor_tkachuk@domain.com</a>
-                  <p>+380964949532</p>
+                  <p class="info-popup-phone">+380964949532</p>
                </div>
             </div>
             <p class="teacher-desc">
@@ -481,9 +501,7 @@
             </p>
             <a href="#" class="toggle-map">toggle map</a>
             <div class="map-wrapper hidden">
-               <iframe src="https://www.google.com/maps/embed/v1/place?q=Kyiv,Ukraine&key=AIzaSyD-FAKE-KEY-FOR-DEV"
-                  width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"
-                  referrerpolicy="no-referrer-when-downgrade"></iframe>
+
             </div>
          </div>
       </div>

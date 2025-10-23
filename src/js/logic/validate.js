@@ -1,31 +1,35 @@
+import _ from 'lodash';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
 
 function isValid(user, stringKeysToValid) {
-    for (const key of stringKeysToValid) {
-        const val = user[key];
-        if (!val) {
-            continue;
-        }
-        if (typeof val !== 'string') {
-            return false;
-        }
-        if (val && val[0] !== val[0].toUpperCase()) {
-            return false;
-        }
-    }
-    if (typeof user.age !== 'number') {
-        return false;
-    }
-    const phone = parsePhoneNumberFromString(user.phone);
-    if (!phone || !phone.isValid()) {
-        return false;
-    }
-    // example@domain.com
-    if (!(/^[^@\s]+@[^@\s]+\.[^@\s]+$/i.test(user.email))) {
-        return false;
-    }
+    const allChecks = [
+        () => _.every(stringKeysToValid, key => {
+            const value = _.get(user, key);
+            if (!value) {
+                return true;
+            }
+            if (!_.isString(value)) {
+                return false;
+            }
+            const trimmedValue = _.trim(value);
+            return trimmedValue.length === 0 || (trimmedValue[0] === trimmedValue[0].toUpperCase());
+        }),
 
-    return true;
+        () => _.isNumber(user.age),
+
+        () => {
+            const phoneStr = _.get(user, 'phone');
+            const phone = parsePhoneNumberFromString(phoneStr || '');
+            return phone && phone.isValid();
+        },
+
+        () => {
+            const emailStr = _.get(user, 'email');
+            const regex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/i;
+            return _.isString(emailStr) && regex.test(emailStr);
+        }
+    ];
+    return _.every(allChecks, check => check());
 }
 
 export {

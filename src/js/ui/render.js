@@ -1,6 +1,9 @@
+import { getDisplayedUsers, getUsers, getAllCountries } from "../data/data.js";
 import { COURSES } from "../data/constants.js";
-import { getDisplayedUsers, getUsers } from "../data/data";
-import { getAllCountries } from "../data/data.js";
+
+let statisticsChart;
+let pivotReport;
+let isFlat;
 
 async function renderTeachers(isFavorite) {
 
@@ -180,6 +183,64 @@ async function renderTable(users = null, sortState = { key: null, direction: nul
     wrapper.appendChild(table);
 }
 
+async function renderPieChart() {
+    const users = await getUsers();
+
+    const courseCounts = users.reduce((acc, user) => {
+        const course = user.course || 'Unknown';
+        acc[course] = (acc[course] || 0) + 1;
+        return acc;
+    }, {});
+
+    const ctx = document.querySelector('.statistics-chart');
+    if (!ctx) return;
+
+    if (statisticsChart) {
+        statisticsChart.destroy();
+    }
+
+    statisticsChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: Object.keys(courseCounts),
+            datasets: [{
+                label: 'Users per course',
+                data: Object.values(courseCounts),
+                backgroundColor: [
+                    '#36A2EB', '#FF6384', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40',
+                    '#E7E9ED', '#8D6E63', '#FF8A65', '#4DB6AC', '#BA68C8', '#A1887F'
+                ]
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function (context) {
+                            let label = context.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed !== null) {
+                                const total = context.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                                const value = context.parsed;
+                                const percentage = ((value / total) * 100).toFixed(1) + '%';
+                                label += `${value} (${percentage})`;
+                            }
+                            return label;
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
 function renderAddTeacherForm() {
     const form = document.querySelector('.add-teacher-popup form');
     if (!form) return;
@@ -209,8 +270,181 @@ function renderAddTeacherForm() {
         }
         courseSelect.appendChild(fragment);
     }
-
-
 }
 
-export { renderTeachers, renderFilters, renderTable, renderAddTeacherForm };
+async function renderPivotTable(setFlat) {
+    if (setFlat !== undefined) {
+        isFlat = setFlat;
+    }
+    if (pivotReport) {
+        pivotReport.dispose();
+        pivotReport = null;
+    }
+    const users = await getUsers();
+
+    const reportData = users.map(user => ({
+        "Full Name": user.full_name,
+        "Gender": user.gender,
+        "Birth Date": user.b_date,
+        "Age": user.age,
+        "Email": user.email,
+        "Phone": user.phone,
+        "Country": user.country,
+        "City": user.city,
+        "Latitude": user.latitude,
+        "Longitude": user.longitude,
+        "Note": user.note,
+        "Speciality": user.course,
+        "Favorite": user.favorite ? "Yes" : "No"
+    }));
+
+    if (isFlat) {
+        pivotReport = new WebDataRocks({
+            container: "#pivot-container",
+            toolbar: true,
+            report: {
+                dataSource: {
+                    data: reportData
+                },
+                "slice": {
+                    "rows": [
+                        {
+                            "uniqueName": "Full Name"
+                        },
+                        {
+                            "uniqueName": "Age"
+                        },
+                        {
+                            "uniqueName": "Birth Date.Day"
+                        },
+                        {
+                            "uniqueName": "Birth Date.Month"
+                        },
+                        {
+                            "uniqueName": "Birth Date.Year"
+                        },
+                        {
+                            "uniqueName": "City"
+                        },
+                        {
+                            "uniqueName": "Country"
+                        },
+                        {
+                            "uniqueName": "Email"
+                        },
+                        {
+                            "uniqueName": "Favorite"
+                        },
+                        {
+                            "uniqueName": "Latitude"
+                        },
+                        {
+                            "uniqueName": "Longitude"
+                        },
+                        {
+                            "uniqueName": "Note"
+                        },
+                        {
+                            "uniqueName": "Phone"
+                        },
+                        {
+                            "uniqueName": "Speciality"
+                        },
+                        {
+                            "uniqueName": "Gender"
+                        }
+                    ],
+                    "columns": [
+
+                    ],
+                    "measures": [
+
+                    ],
+                    "flatOrder": [
+                        "Full Name",
+                        "Gender",
+                        "Age",
+                        "Birth Date.Day",
+                        "Birth Date.Month",
+                        "Birth Date.Year",
+                        "City",
+                        "Country",
+                        "Email",
+                        "Favorite",
+                        "Latitude",
+                        "Longitude",
+                        "Note",
+                        "Phone",
+                        "Speciality"
+                    ]
+                },
+                "options": {
+                    "grid": {
+                        "type": "flat"
+                    }
+                }
+            }
+        });
+    } else {
+        pivotReport = new WebDataRocks({
+            container: "#pivot-container",
+            toolbar: true,
+            report: {
+                dataSource: {
+                    data: reportData
+                },
+                "slice": {
+                    "rows": [
+                        {
+                            "uniqueName": "Country"
+                        },
+                        {
+                            "uniqueName": "Speciality"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "uniqueName": "Gender"
+                        },
+                        {
+                            "uniqueName": "Measures"
+                        }
+                    ],
+                    "measures": [
+                        {
+                            "uniqueName": "Users",
+                            "formula": "count(\"Full Name\") ",
+                            "caption": "Sum of Users"
+                        },
+                        {
+                            "uniqueName": "Average Age",
+                            "formula": "average(\"Age\") ",
+                            "caption": "Sum of Average Age",
+                            "format": "6nwnguvr"
+                        }
+                    ]
+                },
+                "options": {
+                    "grid": {
+                        "type": "classic"
+                    }
+                },
+                "formats": [
+                    {
+                        "name": "6nwnguvr",
+                        "thousandsSeparator": " ",
+                        "decimalSeparator": ".",
+                        "decimalPlaces": 0,
+                        "currencySymbol": "",
+                        "currencySymbolAlign": "left",
+                        "nullValue": "",
+                        "textAlign": "right",
+                        "isPercent": false
+                    }
+                ]
+            }
+        });
+    }
+}
+
+export { renderTeachers, renderFilters, renderTable, renderAddTeacherForm, renderPieChart, renderPivotTable };

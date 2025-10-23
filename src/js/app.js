@@ -7,7 +7,7 @@ import { sortUsersBy } from './logic/sort.js';
 import { searchUsers } from './logic/search.js';
 import { setupUIEvents } from './ui/events.js';
 import { setUsers } from './data/data.js';
-import { renderTeachers, renderFilters, renderTable, renderAddTeacherForm } from './ui/render.js';
+import { renderTeachers, renderFilters, renderTable, renderAddTeacherForm, renderPieChart } from './ui/render.js';
 import { fetchUsers } from './api/fetchUsers.js';
 
 
@@ -22,7 +22,7 @@ console.log(repairedUsers);
 // }));
 
 for (const user of repairedUsers) {
-  const valid = isValid(user, STRING_KEYS_TO_VALID);
+  // const valid = isValid(user, STRING_KEYS_TO_VALID);
   // console.log(`${user.id} ${valid}`);
 }
 const validUsers = repairedUsers.filter(u => isValid(u, STRING_KEYS_TO_VALID));
@@ -88,10 +88,9 @@ async function startApp() {
   await renderTeachers(true);
   renderFilters();
   await renderTable();
+  await renderPieChart();
   renderAddTeacherForm();
   setupUIEvents();
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  startApp();
-});
+window.addEventListener('load', startApp);

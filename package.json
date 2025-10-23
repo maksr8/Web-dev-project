@@ -44,6 +44,11 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "libphonenumber-js": "^1.12.22"
+    "@webdatarocks/webdatarocks": "^1.4.21",
+    "chart.js": "^4.5.1",
+    "dayjs": "^1.11.18",
+    "leaflet": "^1.9.4",
+    "libphonenumber-js": "^1.12.22",
+    "lodash": "^4.17.21"
   }
 }

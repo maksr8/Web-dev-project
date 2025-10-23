@@ -91,6 +91,29 @@ section {
     flex-direction: column;
     align-items: center;
     gap: 2rem;
+
+    .statistics-toggle {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        justify-content: center;
+
+        .button1[disabled] {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+    }
+
+    .chart-wrapper {
+        width: 100%;
+        max-width: 800px;
+
+        canvas {
+            width: 100%;
+        }
+    }
 }
 
 .table-wrapper {
