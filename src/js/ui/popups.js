@@ -4,6 +4,7 @@ import { isValid } from '../logic/validate.js';
 import { STRING_KEYS_TO_VALID } from '../data/constants.js';
 import { calcAgeByBirthDate } from '../data/users.js';
 import { updatePaginationButtons } from './pagination.js';
+import { getDaysToBirthday } from '../logic/utils.js';
 import L from "leaflet";
 import 'leaflet/dist/leaflet.css';
 import iconUrl from "leaflet/dist/images/marker-icon.png";
@@ -55,19 +56,33 @@ function openPopupWithTeacher(teacher) {
         if (starEmpty) starEmpty.classList.remove('hidden');
     }
 
-    const subjectEl = popup.querySelector('.subject');
+    const subjectEl = popup.querySelector('.info-popup-subject');
     if (subjectEl) {
         subjectEl.textContent = teacher.course || '';
     }
 
-    const locEl = popup.querySelector('.div-info p:nth-of-type(2)');
+    const locEl = popup.querySelector('.info-popup-location');
     if (locEl) {
         locEl.textContent = [teacher.city, teacher.country].filter(Boolean).join(', ');
     }
 
-    const ageGenderEl = popup.querySelector('.div-info p:nth-of-type(3)');
+    const ageGenderEl = popup.querySelector('.info-popup-age-gender');
     if (ageGenderEl) {
         ageGenderEl.textContent = `${teacher.age}, ${teacher.gender}`;
+    }
+
+    const birthdayEl = popup.querySelector('.birthday-countdown');
+    if (birthdayEl) {
+        const daysLeft = getDaysToBirthday(teacher.b_date);
+
+        if (daysLeft === null) {
+            birthdayEl.textContent = 'Birthday info not available';
+        } else if (daysLeft === 0) {
+            birthdayEl.textContent = 'Today is the birthday!';
+        } else {
+            const dayString = daysLeft === 1 ? 'day' : 'days';
+            birthdayEl.textContent = `${daysLeft} ${dayString} until next birthday`;
+        }
     }
 
     const emailEl = popup.querySelector('.div-info a');
@@ -76,7 +91,7 @@ function openPopupWithTeacher(teacher) {
         emailEl.href = `mailto:${teacher.email || ''}`;
     }
 
-    const phoneEl = popup.querySelector('.div-info p:nth-of-type(4)');
+    const phoneEl = popup.querySelector('.info-popup-phone');
     if (phoneEl) {
         phoneEl.textContent = teacher.phone || '';
     }
