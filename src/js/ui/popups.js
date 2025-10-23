@@ -1,5 +1,5 @@
 import { getTeacherById, addUser, updateDisplayed } from '../data/data.js';
-import { renderPieChart, renderTable, renderTeachers } from './render.js';
+import { renderPieChart, renderPivotTable, renderTable, renderTeachers } from './render.js';
 import { isValid } from '../logic/validate.js';
 import { STRING_KEYS_TO_VALID } from '../data/constants.js';
 import { calcAgeByBirthDate } from '../data/users.js';
@@ -172,6 +172,8 @@ async function handlePopupClick(e) {
                 await updateDisplayed();
                 await renderTeachers(false);
                 await renderTeachers(true);
+                await renderPieChart();
+                await renderPivotTable();
             }
 
         }
@@ -249,6 +251,7 @@ async function handleAddTeacherSubmit(e) {
     await renderTable();
     updatePaginationButtons();
     await renderPieChart();
+    await renderPivotTable();
     const popup = form.closest('.popup');
     closePopup(popup);
     form.reset();

@@ -12,7 +12,12 @@
 
    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.umd.js"
       integrity="sha512-D4pL3vNgjkHR/qq+nZywuS6Hg1gwR+UzrdBW6Yg8l26revKyQHMgPq9CLJ2+HHalepS+NuGw1ayCCsGXu9JCXA=="
-      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+      </script>
+
+   <link href="https://cdn.webdatarocks.com/latest/webdatarocks.min.css" rel="stylesheet" />
+   <script src="https://cdn.webdatarocks.com/latest/webdatarocks.toolbar.min.js"></script>
+   <script src="https://cdn.webdatarocks.com/latest/webdatarocks.js"></script>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -199,6 +204,8 @@
             <nav class="statistics-toggle">
                <button class="button1 no-select " disabled>Table</button>
                <button class="button1 no-select">Chart</button>
+               <button class="button1 no-select">Report</button>
+               <button class="button1 no-select">Flat</button>
             </nav>
             <div class="chart-wrapper hidden">
                <canvas class="statistics-chart"></canvas>
@@ -288,6 +295,7 @@
                   </tbody>
                </table>
             </div>
+            <div id="pivot-container" class="hidden"></div>
             <nav class="pagination hidden">
                <a href="#">1</a>
                <a href="#">2</a>

@@ -1,8 +1,9 @@
+import { getDisplayedUsers, getUsers, getAllCountries } from "../data/data.js";
 import { COURSES } from "../data/constants.js";
-import { getDisplayedUsers, getUsers } from "../data/data";
-import { getAllCountries } from "../data/data.js";
 
 let statisticsChart;
+let pivotReport;
+let isFlat;
 
 async function renderTeachers(isFavorite) {
 
@@ -269,8 +270,181 @@ function renderAddTeacherForm() {
         }
         courseSelect.appendChild(fragment);
     }
-
-
 }
 
-export { renderTeachers, renderFilters, renderTable, renderAddTeacherForm, renderPieChart };
+async function renderPivotTable(setFlat) {
+    if (setFlat !== undefined) {
+        isFlat = setFlat;
+    }
+    if (pivotReport) {
+        pivotReport.dispose();
+        pivotReport = null;
+    }
+    const users = await getUsers();
+
+    const reportData = users.map(user => ({
+        "Full Name": user.full_name,
+        "Gender": user.gender,
+        "Birth Date": user.b_date,
+        "Age": user.age,
+        "Email": user.email,
+        "Phone": user.phone,
+        "Country": user.country,
+        "City": user.city,
+        "Latitude": user.latitude,
+        "Longitude": user.longitude,
+        "Note": user.note,
+        "Speciality": user.course,
+        "Favorite": user.favorite ? "Yes" : "No"
+    }));
+
+    if (isFlat) {
+        pivotReport = new WebDataRocks({
+            container: "#pivot-container",
+            toolbar: true,
+            report: {
+                dataSource: {
+                    data: reportData
+                },
+                "slice": {
+                    "rows": [
+                        {
+                            "uniqueName": "Full Name"
+                        },
+                        {
+                            "uniqueName": "Age"
+                        },
+                        {
+                            "uniqueName": "Birth Date.Day"
+                        },
+                        {
+                            "uniqueName": "Birth Date.Month"
+                        },
+                        {
+                            "uniqueName": "Birth Date.Year"
+                        },
+                        {
+                            "uniqueName": "City"
+                        },
+                        {
+                            "uniqueName": "Country"
+                        },
+                        {
+                            "uniqueName": "Email"
+                        },
+                        {
+                            "uniqueName": "Favorite"
+                        },
+                        {
+                            "uniqueName": "Latitude"
+                        },
+                        {
+                            "uniqueName": "Longitude"
+                        },
+                        {
+                            "uniqueName": "Note"
+                        },
+                        {
+                            "uniqueName": "Phone"
+                        },
+                        {
+                            "uniqueName": "Speciality"
+                        },
+                        {
+                            "uniqueName": "Gender"
+                        }
+                    ],
+                    "columns": [
+
+                    ],
+                    "measures": [
+
+                    ],
+                    "flatOrder": [
+                        "Full Name",
+                        "Gender",
+                        "Age",
+                        "Birth Date.Day",
+                        "Birth Date.Month",
+                        "Birth Date.Year",
+                        "City",
+                        "Country",
+                        "Email",
+                        "Favorite",
+                        "Latitude",
+                        "Longitude",
+                        "Note",
+                        "Phone",
+                        "Speciality"
+                    ]
+                },
+                "options": {
+                    "grid": {
+                        "type": "flat"
+                    }
+                }
+            }
+        });
+    } else {
+        pivotReport = new WebDataRocks({
+            container: "#pivot-container",
+            toolbar: true,
+            report: {
+                dataSource: {
+                    data: reportData
+                },
+                "slice": {
+                    "rows": [
+                        {
+                            "uniqueName": "Country"
+                        },
+                        {
+                            "uniqueName": "Speciality"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "uniqueName": "Gender"
+                        },
+                        {
+                            "uniqueName": "Measures"
+                        }
+                    ],
+                    "measures": [
+                        {
+                            "uniqueName": "Users",
+                            "formula": "count(\"Full Name\") ",
+                            "caption": "Sum of Users"
+                        },
+                        {
+                            "uniqueName": "Average Age",
+                            "formula": "average(\"Age\") ",
+                            "caption": "Sum of Average Age",
+                            "format": "6nwnguvr"
+                        }
+                    ]
+                },
+                "options": {
+                    "grid": {
+                        "type": "classic"
+                    }
+                },
+                "formats": [
+                    {
+                        "name": "6nwnguvr",
+                        "thousandsSeparator": " ",
+                        "decimalSeparator": ".",
+                        "decimalPlaces": 0,
+                        "currencySymbol": "",
+                        "currencySymbolAlign": "left",
+                        "nullValue": "",
+                        "textAlign": "right",
+                        "isPercent": false
+                    }
+                ]
+            }
+        });
+    }
+}
+
+export { renderTeachers, renderFilters, renderTable, renderAddTeacherForm, renderPieChart, renderPivotTable };
